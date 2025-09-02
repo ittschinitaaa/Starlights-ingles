@@ -1,32 +1,23 @@
-// commands/info/userinfo.js
+// commands/info/user.js
 module.exports = {
-  command: ["userinfo", "perfil"],
-  description: "Muestra información de un usuario",
+  command: ["user", "perfil"],
+  description: "Muestra información del usuario",
   category: "info",
-  isGroup: false,
-  use: "(@0 o responder a un mensaje)",
-  run: async (client, m, args) => {
-    let user = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m.sender;
+  async run(client, m) {
+    let user = m.sender
+    let nombre = m.pushName || "Sin nombre"
+    let foto = await client.profilePictureUrl(user, "image").catch(_ => null)
 
-    try {
-      const contact = await client.onWhatsApp(user);
-      const profile = await client.getContact(user);
-      const name = profile.notify || profile.name || "Desconocido";
-      const number = user.split("@")[0];
-      const isAdmin = m.isGroup ? (await client.getGroupAdmins(m.chat)).includes(user) : false;
-      const bio = profile.status || "Sin estado";
+    let texto = `👤 *Tu Perfil*
+    
+📛 Nombre: ${nombre}
+📱 Número: wa.me/${user.split("@")[0]}
+🏷️ ID: ${user}`
 
-      let infoMsg = `📌 *Información de Usuario*\n\n`;
-      infoMsg += `👤 Nombre: ${name}\n`;
-      infoMsg += `📱 Número: +${number}\n`;
-      infoMsg += `🆔 ID: ${user}\n`;
-      infoMsg += `💬 Estado: ${bio}\n`;
-      if (m.isGroup) infoMsg += `⭐ Admin: ${isAdmin ? "Sí" : "No"}\n`;
-
-      m.reply(infoMsg);
-    } catch (e) {
-      console.error(e);
-      m.reply("❌ No se pudo obtener la información del usuario");
+    if (foto) {
+      await client.sendMessage(m.chat, { image: { url: foto }, caption: texto }, { quoted: m })
+    } else {
+      m.reply(texto)
     }
-  },
-};
+  }
+}
