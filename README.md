@@ -42,4 +42,8 @@ git clone https://github.com/miaoficial02/Base_WaBot.git
 cd Base_WaBot
 npm install
 node index.js
-
+```
+### **`𝐏𝐑☯︎𝐏𝐈𝚵𝐓公𝐑𝐈公`**
+<a
+href="https://github.com/ittschinitaaa"><img src="https://github.com/ittschinitaaa.png" width="130" height="130" alt="
+mі́ᥲ|᥆𝖿іᥴіᥲᥣ𒆜"/></a>
