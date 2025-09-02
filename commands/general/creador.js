@@ -1,33 +1,29 @@
-// commands/general/creador.js
+// commands/general/creador-img.js
 module.exports = {
   command: ["owner", "creador"],
-  description: "Muestra información del creador del bot",
+  description: "Muestra información del creador del bot con imagen",
   category: "general",
   async run(client, m) {
     try {
-      const name = "Mía (Chinita) 💖"; 
+      const name = "𝐂𝐡𝐢𝐧𝐢𝐭𝐚 🇨🇳🔥"; 
       const number = "923256941884"; 
+      const country = "🇦🇷/🇷🇺 ";
+      const banner = "https://files.catbox.moe/sklz18.png"; // cambia por tu banner/foto
 
-      const caption = `
+      const text = `
 🌸 *Creadora del Bot* 🌸
 
 👑 Nombre: ${name}
 📱 WhatsApp: wa.me/${number}
-💻 País: Argentina 🇦🇷
+💻 País: ${country}
+
+✨ Gracias por usar mi bot 💕
 `;
 
-      const buttons = [
-        { buttonId: "menu", buttonText: { displayText: "📖 Menú" }, type: 1 },
-        { buttonId: "help", buttonText: { displayText: "❓ Ayuda" }, type: 1 }
-      ];
-
-      const msg = {
-        text: caption,
-        footer: "Gracias por usar el bot 💕",
-        buttons: buttons
-      };
-
-      await client.sendMessage(m.chat, msg, { quoted: m });
+      await client.sendMessage(m.chat, {
+        image: { url: banner },
+        caption: text
+      }, { quoted: m });
 
     } catch (e) {
       console.log(e);
@@ -35,7 +31,6 @@ module.exports = {
     }
   }
 };
-
 /*
 module.exports = {
   command: ["creador", "owner"],
