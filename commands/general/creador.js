@@ -1,30 +1,30 @@
-// commands/general/creador-url.js
+// commands/general/creador.js
 module.exports = {
-  command: ["ownerurl", "creadorurl"],
-  description: "Muestra información del creador del bot con enlaces",
+  command: ["owner", "creador"],
+  description: "Muestra información del creador del bot",
   category: "general",
   async run(client, m) {
     try {
       const name = "Mía (Chinita) 💖"; 
       const number = "923256941884"; 
-      const instagram = "https://instagram.com/its.chinitaaa_"; // cámbialo por tu IG
 
       const caption = `
 🌸 *Creadora del Bot* 🌸
 
 👑 Nombre: ${name}
 📱 WhatsApp: wa.me/${number}
-📷 Instagram: ${instagram}
 💻 País: Argentina 🇦🇷
 `;
+
+      const buttons = [
+        { buttonId: "menu", buttonText: { displayText: "📖 Menú" }, type: 1 },
+        { buttonId: "help", buttonText: { displayText: "❓ Ayuda" }, type: 1 }
+      ];
 
       const msg = {
         text: caption,
         footer: "Gracias por usar el bot 💕",
-        templateButtons: [
-          { index: 1, urlButton: { displayText: "🌟 Contactame", url: `https://wa.me/${number}` } },
-          { index: 2, urlButton: { displayText: "📷 Instagram", url: instagram } }
-        ]
+        buttons: buttons
       };
 
       await client.sendMessage(m.chat, msg, { quoted: m });
