@@ -6,10 +6,8 @@ module.exports = {
   isGroup: false,
   run: async (client, m, args) => {
     try {
-      // Foto del creador (puedes poner un enlace a su foto real)
       const fotoCreador = "https://files.catbox.moe/sklz18.png";
 
-      // Texto bonito con emojis
       let mensaje = `👑 *Conoce al Creador del Bot*\n\n`;
       mensaje += `✨ Nombre: Mía "Chinita"\n`;
       mensaje += `📱 WhatsApp: +92 325 6941884\n`;
@@ -17,21 +15,24 @@ module.exports = {
       mensaje += `💌 Bio: "Siempre creando cosas lindas para mis bots 😸"\n\n`;
       mensaje += `🔹 Presiona los botones para contactarme o ver mi Instagram.`;
 
-      // Botones interactivos tipo URL
+      // Botones tipo URL
       const buttons = [
         {
-          url: "https://wa.me/923256941884", // tu número de WhatsApp
-          displayText: "📩 Contactarme",
-          type: 1
+          index: 1,
+          urlButton: {
+            displayText: "📩 Contactarme",
+            url: "https://wa.me/923256941884"
+          }
         },
         {
-          url: "https://www.instagram.com/its.chinitaaa_", // tu Instagram
-          displayText: "ℹ️ Mi Instagram",
-          type: 1
+          index: 2,
+          urlButton: {
+            displayText: "ℹ️ Mi Instagram",
+            url: "https://www.instagram.com/its.chinitaaa_"
+          }
         }
       ];
 
-      // Enviar mensaje con foto y botones
       await client.sendMessage(m.chat, {
         image: { url: fotoCreador },
         caption: mensaje,
