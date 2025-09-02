@@ -7,7 +7,7 @@ module.exports = {
   run: async (client, m, args) => {
     try {
       // Foto del creador (puedes poner un enlace a su foto real)
-      const fotoCreador = "https://files.catbox.moe/sklz18.png;
+      const fotoCreador = "https://files.catbox.moe/sklz18.png";
 
       // Texto bonito con emojis
       let mensaje = `👑 *Conoce al Creador del Bot*\n\n`;
