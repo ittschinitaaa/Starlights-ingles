@@ -17,7 +17,7 @@ global.mess = {
   wait: "→ Espera un momento...",
 };
 
-global.thumbnailUrl = "https://i.ibb.co/P0VXh06/5faea421e58b.jpg"; //Cambia esta imagen
+global.thumbnailUrl = "https://files.catbox.moe/sklz18.png"; //Cambia esta imagen
 
 global.my = {
   ch: "120363401477412280@newsletter", //Cambia este id por el de tu canal
