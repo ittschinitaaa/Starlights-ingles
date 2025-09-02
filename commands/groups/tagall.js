@@ -1,33 +1,23 @@
-// commands/groups/tagall.js
 module.exports = {
-  command: ["tagall", "todos", "invocar"],
-  description: "Menciona a todos los miembros del grupo",
+  name: "tagall",
   category: "groups",
   isGroup: true,
-  isAdmin: true,
+  botAdmin: true,
+  run: async (conn, m, args) => {
+    if (!m.isGroup) return m.reply("Este comando solo funciona en grupos");
 
-  run: async (client, m, { text, participants, groupMetadata }) => {
-    try {
-      let mensaje = text ? text : "✨ Atención familia ✨"; 
-      let users = participants.map(p => p.id);
+    const metadata = await conn.groupMetadata(m.chat);
+    const participants = metadata.participants || [];
 
-      let texto = `
-🌸 *Invocación en ${groupMetadata.subject}* 🌸  
+    let text = "👥 Mención a todos:\n\n";
+    const mentions = participants.map(p => p.id);
 
-📢 ${mensaje}
+    text += mentions.map(id => `@${id.split("@")[0]}`).join("\n");
 
-👥 *Participantes (${users.length}):*
-${users.map(u => `➤ @${u.split("@")[0]}`).join("\n")}
-      `.trim();
-
-      await client.sendMessage(
-        m.chat,
-        { text: texto, mentions: users },
-        { quoted: m }
-      );
-    } catch (e) {
-      console.error(e);
-      await m.reply("❌ Error al ejecutar el comando.");
-    }
+    await conn.sendMessage(
+      m.chat,
+      { text, mentions },
+      { quoted: m }
+    );
   },
 };
