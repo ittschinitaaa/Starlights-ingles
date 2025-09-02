@@ -38,8 +38,8 @@ Descargas rápidas:
 ```bash
 apt install git -y
 apt install nodejs -y
-git clone https://github.com/miaoficial02/Base_WaBot.git
-cd Base_WaBot
+git clone https://github.com/ittschinitaaa/Starlights.git
+cd Starlights
 npm install
 node index.js
 ```
