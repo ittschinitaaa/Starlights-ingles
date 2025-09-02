@@ -51,7 +51,7 @@ module.exports = {
 │
 │  ${ucapan}, *${m.pushName || "Usuario"}*
 │
-│  *Mini Lurus*
+│  *𝐒𝐓𝐀𝐑𝐋𝐈𝐆𝐇𝐓𝐒 ✨*
 │  Creador  : 𝐂𝐡𝐢𝐧𝐚 🇨🇳🔥
 │  Versión  : ${version}
 │  Motor    : Baileys
@@ -72,7 +72,7 @@ module.exports = {
     await client.sendMessage(
       m.chat,
       {
-        image: { url: "https://i.ibb.co/P0VXh06/5faea421e58b.jpg" },
+        image: { url: "https://files.catbox.moe/sklz18.png" },
         caption: menu,
       },
       { quoted: fkontak },
