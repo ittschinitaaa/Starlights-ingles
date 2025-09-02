@@ -4,8 +4,8 @@ const chalk = require("chalk");
 global.owner = ["923256941884"]; //Cambia este número por el tuyo
 global.sessionName = "lurus_session";
 global.version = "v1.0.0 | Mini";
-global.namebot = "Ai Lurus - Mini";
-global.author = "Zam | Ai Lurus";
+global.namebot = "𝐒𝐭𝐚𝐫𝐥𝐢𝐠𝐡𝐭𝐬";
+global.author = "𝐂𝐡𝐢𝐧𝐚 | 𝐒𝐭𝐚𝐫𝐥𝐢𝐠𝐡𝐭𝐬";
 
 //Modifica los mensajes a tu preferencia
 global.mess = {
