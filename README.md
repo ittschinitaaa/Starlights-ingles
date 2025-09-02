@@ -1,5 +1,5 @@
-## Mini Lurus
-> Versión simple de Lurus Bot, creada como base para desarrolladores que desean iniciar su propio bot de WhatsApp desde cero.
+## ﹒⌗﹒𝐒𝐓𝐀𝐑𝐋𝐈𝐆𝐇𝐓𝐒.ৎ˚₊‧ 
+> base para desarrolladores que desean iniciar su propio bot de WhatsApp desde cero.
 
 <p align="center">
   <img src="https://files.catbox.moe/sklz18.png" width="220px"/>
