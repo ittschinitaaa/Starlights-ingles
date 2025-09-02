@@ -2,7 +2,7 @@
 > Versión simple de Lurus Bot, creada como base para desarrolladores que desean iniciar su propio bot de WhatsApp desde cero.
 
 <p align="center">
-  <img src="https://avatars.githubusercontent.com/miaoficial02" width="220px"/>
+  <img src="https://files.catbox.moe/sklz18.png" width="220px"/>
 </p>
   
 
