@@ -9,7 +9,7 @@ module.exports = {
   run: async (client, m) => {
     try {
       await client.groupSettingUpdate(m.chat, "not_announcement");
-      m.reply("🔓 El grupo ahora está *abierto* (todos pueden enviar mensajes).");
+      m.reply("🔓 El grupo ahora está *abierto* .");
     } catch (e) {
       console.error(e);
       m.reply("❌ No se pudo abrir el grupo");
