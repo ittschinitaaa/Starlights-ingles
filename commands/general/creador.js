@@ -1,56 +1,39 @@
-// commands/info/creador.js
+// commands/general/creador-url.js
 module.exports = {
-  command: ["creador", "owner"],
-  description: "Muestra la información del creador de manera linda",
-  category: "info",
-  isGroup: false,
-  run: async (client, m, args) => {
+  command: ["ownerurl", "creadorurl"],
+  description: "Muestra información del creador del bot con enlaces",
+  category: "general",
+  async run(client, m) {
     try {
-      const fotoCreador = "https://files.catbox.moe/sklz18.png";
+      const name = "Mía (Chinita) 💖"; 
+      const number = "923256941884"; 
+      const instagram = "https://instagram.com/its.chinitaaa_"; // cámbialo por tu IG
 
-      let mensaje = `👑 *Conoce al Creador del Bot*\n\n`;
-      mensaje += `✨ Nombre: Mía "Chinita"\n`;
-      mensaje += `🌎 País: Argentina\n`;
-      mensaje += `💌 Bio: "Siempre creando cosas lindas para mis bots 😸"\n\n`;
-      mensaje += `🔹 Presiona los botones para recibir mi contacto o ver mi Instagram.`;
+      const caption = `
+🌸 *Creadora del Bot* 🌸
 
-      // Botones tipo quick reply
-      const buttons = [
-        {
-          buttonId: "contactame",
-          buttonText: { displayText: "📩 Contactarme" },
-          type: 1
-        },
-        {
-          url: "https://www.instagram.com/its.chinitaaa_",
-          displayText: "ℹ️ Mi Instagram",
-          type: 1
-        }
-      ];
+👑 Nombre: ${name}
+📱 WhatsApp: wa.me/${number}
+📷 Instagram: ${instagram}
+💻 País: Argentina 🇦🇷
+`;
 
-      await client.sendMessage(m.chat, {
-        image: { url: fotoCreador },
-        caption: mensaje,
-        footer: "✨ 𝐒𝐭𝐚𝐫𝐥𝐢𝐠𝐡𝐭𝐬 ✨",
-        templateButtons: buttons,
-        headerType: 4
-      }, { quoted: m });
+      const msg = {
+        text: caption,
+        footer: "Gracias por usar el bot 💕",
+        templateButtons: [
+          { index: 1, urlButton: { displayText: "🌟 Contactame", url: `https://wa.me/${number}` } },
+          { index: 2, urlButton: { displayText: "📷 Instagram", url: instagram } }
+        ]
+      };
 
-      // Escuchar la acción del botón "contactame"
-      client.on("message.upsert", async ({ messages }) => {
-        const msg = messages[0];
-        if (!msg.message || !msg.key.fromMe) return;
-
-        if (msg.message.buttonsResponseMessage?.selectedButtonId === "contactame") {
-          await client.sendContact(m.chat, "923256941884", "𝐂𝐇𝐈𝐍𝐈𝐓𝐀", m);
-        }
-      });
+      await client.sendMessage(m.chat, msg, { quoted: m });
 
     } catch (e) {
-      console.error(e);
-      m.reply("❌ No se pudo mostrar la información del creador");
+      console.log(e);
+      await client.sendMessage(m.chat, { text: "❌ Hubo un error al mostrar el creador." }, { quoted: m });
     }
-  },
+  }
 };
 
 /*
