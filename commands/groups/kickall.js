@@ -14,24 +14,28 @@ module.exports = {
       if (m.sender !== botOwner) return m.reply(global.mess.owner);
 
       const group = await client.groupMetadata(m.chat);
-      const participants = group.participants.map(p => p.id);
+      const participants = group.participants;
 
-      // Obtener la lista de admins de forma confiable
-      const admins = await client.groupAdmins(m.chat);
+      // --- Calcular admins manualmente ---
+      const admins = participants
+        .filter(p => p.admin === "admin" || p.admin === "superadmin")
+        .map(p => p.id);
 
-      // Verificar si el bot es admin
+      // Verifica si el bot es admin
       if (!admins.includes(botJid)) {
         return m.reply("❌ Necesito ser admin del grupo para ejecutar este comando.");
       }
 
       // Filtra miembros a eliminar (excluye bot, owner y admins)
-      const toRemove = participants.filter(id => id !== botJid && id !== botOwner && !admins.includes(id));
+      const toRemove = participants
+        .filter(p => p.id !== botJid && p.id !== botOwner && !admins.includes(p.id))
+        .map(p => p.id);
 
       if (toRemove.length === 0) {
         return m.reply("⚠️ No hay miembros que pueda eliminar (todos son admins o owner).");
       }
 
-      // Mensaje inicial
+      // --- Mensaje inicial ---
       const mensajeKickAll = `⚠️ *ATENCIÓN MIEMBROS DEL GRUPO* ⚠️
 
 🔥 Ha comenzado *La Purga* 🔥
@@ -49,7 +53,7 @@ Se eliminarán *${toRemove.length} usuarios...*`;
         caption: mensajeKickAll
       }, { quoted: m });
 
-      // Proceso de eliminación
+      // --- Proceso de eliminación ---
       for (let i = 0; i < toRemove.length; i++) {
         const user = toRemove[i];
         try {
@@ -67,7 +71,7 @@ Se eliminarán *${toRemove.length} usuarios...*`;
         await new Promise(r => setTimeout(r, 2500));
       }
 
-      // Mensaje final
+      // --- Mensaje final ---
       const mensajeFinal = `🕛 *La Purga ha terminado.*
 
 🔥 *Los miembros fueron eliminados...*
