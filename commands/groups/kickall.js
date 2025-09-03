@@ -14,11 +14,10 @@ module.exports = {
       const group = await client.groupMetadata(m.chat);
       const participants = group.participants;
 
-      // Verifica que el bot siga siendo admin
       const botParticipant = participants.find(p => p.id === botJid);
-      if (!botParticipant || (botParticipant.admin !== "admin" && botParticipant.admin !== "superadmin")) {
-        return m.reply("❌ Necesito ser admin del grupo para ejecutar este comando.");
-      }
+      const isBotAdmin = botParticipant?.admin === "admin" || botParticipant?.admin === "superadmin";
+
+      if (!isBotAdmin) return m.reply("❌ Necesito ser admin del grupo para ejecutar este comando.");
 
       // Filtra a los miembros a eliminar (excluye bot, owner y admins)
       const toRemove = participants
@@ -46,7 +45,7 @@ Se eliminarán *${toRemove.length} usuarios...*`;
 
       // --- Proceso de eliminación ---
       for (let i = 0; i < toRemove.length; i++) {
-        let user = toRemove[i];
+        const user = toRemove[i];
         try {
           await client.groupParticipantsUpdate(m.chat, [user], "remove");
           await client.sendMessage(m.chat, {
