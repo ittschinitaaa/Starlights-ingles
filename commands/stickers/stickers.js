@@ -21,7 +21,7 @@ module.exports = {
     if (/image/.test(mime)) {
       media = await quoted.download();
       let encmedia = await client.sendImageAsSticker(m.chat, media, m, {
-        packname: stickerTxT2,
+        packname: stickerTxT,
         author: stickerTxT,
       });
       await fs.unlinkSync(encmedia);
