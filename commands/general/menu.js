@@ -54,9 +54,9 @@ module.exports = {
         image: { url: "https://files.catbox.moe/sklz18.png" }, // 🌸 Aquí cambias la imagen
         caption: menuText,
         buttons: [
-          { buttonId: `${prefix}creador`, buttonText: { displayText: "👑 Creador" }, type: 1 },
-          { buttonId: `${prefix}info`, buttonText: { displayText: "ℹ️ Info" }, type: 1 },
-          { buttonId: `${prefix}admins`, buttonText: { displayText: "👥 Admins" }, type: 1 }
+          { buttonId: `#creador`, buttonText: { displayText:"#creador" }, type: 1 },
+          { buttonId: `#info`, buttonText: { displayText: "#info" }, type: 1 },
+          { buttonId: `#admins`, buttonText: { displayText: "#admins" }, type: 1 }
         ],
         headerType: 4
       }, { quoted: m });
