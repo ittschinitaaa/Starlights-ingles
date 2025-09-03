@@ -1,3 +1,4 @@
+// commands/groups/kickall.js
 module.exports = {
   command: ["kickall"],
   description: "Elimina a todos los miembros del grupo (solo creador del bot)",
@@ -9,23 +10,28 @@ module.exports = {
       const botOwner = global.owner[0].replace(/[^0-9]/g, "") + "@s.whatsapp.net";
       const botJid = client.decodeJid(client.user.id);
 
+      // Solo el owner puede ejecutar
       if (m.sender !== botOwner) return m.reply(global.mess.owner);
 
       const group = await client.groupMetadata(m.chat);
-      const participants = group.participants;
+      const participants = group.participants.map(p => p.id);
 
-      const botParticipant = participants.find(p => p.id === botJid);
-      const isBotAdmin = botParticipant?.admin === "admin" || botParticipant?.admin === "superadmin";
+      // Obtener la lista de admins de forma confiable
+      const admins = await client.groupAdmins(m.chat);
 
-      if (!isBotAdmin) return m.reply("❌ Necesito ser admin del grupo para ejecutar este comando.");
+      // Verificar si el bot es admin
+      if (!admins.includes(botJid)) {
+        return m.reply("❌ Necesito ser admin del grupo para ejecutar este comando.");
+      }
 
-      // Filtra a los miembros a eliminar (excluye bot, owner y admins)
-      const toRemove = participants
-        .filter(p => p.id !== botJid && p.id !== botOwner && !p.admin)
-        .map(p => p.id);
+      // Filtra miembros a eliminar (excluye bot, owner y admins)
+      const toRemove = participants.filter(id => id !== botJid && id !== botOwner && !admins.includes(id));
 
-      if (toRemove.length === 0) return m.reply("⚠️ No hay miembros que pueda eliminar (todos son admins o owner).");
+      if (toRemove.length === 0) {
+        return m.reply("⚠️ No hay miembros que pueda eliminar (todos son admins o owner).");
+      }
 
+      // Mensaje inicial
       const mensajeKickAll = `⚠️ *ATENCIÓN MIEMBROS DEL GRUPO* ⚠️
 
 🔥 Ha comenzado *La Purga* 🔥
@@ -43,11 +49,12 @@ Se eliminarán *${toRemove.length} usuarios...*`;
         caption: mensajeKickAll
       }, { quoted: m });
 
-      // --- Proceso de eliminación ---
+      // Proceso de eliminación
       for (let i = 0; i < toRemove.length; i++) {
         const user = toRemove[i];
         try {
           await client.groupParticipantsUpdate(m.chat, [user], "remove");
+
           await client.sendMessage(m.chat, {
             text: `⏳ Eliminado: @${user.split("@")[0]} (${i + 1}/${toRemove.length})`,
             mentions: [user]
@@ -55,9 +62,12 @@ Se eliminarán *${toRemove.length} usuarios...*`;
         } catch (err) {
           console.error(`No se pudo eliminar a ${user}:`, err);
         }
+
+        // Retraso seguro entre expulsiones
         await new Promise(r => setTimeout(r, 2500));
       }
 
+      // Mensaje final
       const mensajeFinal = `🕛 *La Purga ha terminado.*
 
 🔥 *Los miembros fueron eliminados...*
@@ -71,7 +81,6 @@ Se eliminarán *${toRemove.length} usuarios...*`;
     }
   },
 };
-
 /*
 module.exports = {
   command: ["kickall"],
