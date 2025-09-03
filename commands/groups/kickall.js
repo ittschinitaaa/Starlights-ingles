@@ -1,4 +1,3 @@
-// commands/groups/kickall.js
 module.exports = {
   command: ["kickall"],
   description: "Elimina a todos los miembros del grupo (solo creador del bot)",
@@ -10,17 +9,14 @@ module.exports = {
       const botOwner = global.owner[0].replace(/[^0-9]/g, "") + "@s.whatsapp.net";
       const botJid = client.decodeJid(client.user.id);
 
-      // Verifica que solo el owner del bot pueda ejecutar
-      if (m.sender !== botOwner) {
-        return m.reply(global.mess.owner);
-      }
+      if (m.sender !== botOwner) return m.reply(global.mess.owner);
 
       const group = await client.groupMetadata(m.chat);
       const participants = group.participants;
 
       // Verifica que el bot siga siendo admin
       const botParticipant = participants.find(p => p.id === botJid);
-      if (!botParticipant?.admin) {
+      if (!botParticipant || (botParticipant.admin !== "admin" && botParticipant.admin !== "superadmin")) {
         return m.reply("❌ Necesito ser admin del grupo para ejecutar este comando.");
       }
 
@@ -29,11 +25,8 @@ module.exports = {
         .filter(p => p.id !== botJid && p.id !== botOwner && !p.admin)
         .map(p => p.id);
 
-      if (toRemove.length === 0) {
-        return m.reply("⚠️ No hay miembros que pueda eliminar (todos son admins o owner).");
-      }
+      if (toRemove.length === 0) return m.reply("⚠️ No hay miembros que pueda eliminar (todos son admins o owner).");
 
-      // --- Mensaje inicial ---
       const mensajeKickAll = `⚠️ *ATENCIÓN MIEMBROS DEL GRUPO* ⚠️
 
 🔥 Ha comenzado *La Purga* 🔥
@@ -56,7 +49,6 @@ Se eliminarán *${toRemove.length} usuarios...*`;
         let user = toRemove[i];
         try {
           await client.groupParticipantsUpdate(m.chat, [user], "remove");
-
           await client.sendMessage(m.chat, {
             text: `⏳ Eliminado: @${user.split("@")[0]} (${i + 1}/${toRemove.length})`,
             mentions: [user]
@@ -64,12 +56,9 @@ Se eliminarán *${toRemove.length} usuarios...*`;
         } catch (err) {
           console.error(`No se pudo eliminar a ${user}:`, err);
         }
-
-        // Retraso seguro entre expulsiones
         await new Promise(r => setTimeout(r, 2500));
       }
 
-      // --- Mensaje final ---
       const mensajeFinal = `🕛 *La Purga ha terminado.*
 
 🔥 *Los miembros fueron eliminados...*
