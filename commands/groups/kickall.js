@@ -47,7 +47,7 @@ module.exports = {
 
       // --- Mensaje final solo texto ---
       await client.sendMessage(m.chat, {
-        text: `✅ *Kickall completado*\n\nSe eliminaron *${toRemove.length}* miembros correctamente.`
+        text: `🕛 *La Purga ha terminado.*\n\n🔥 *los miembros fueron eliminados...*\n> Se eliminaron *${toRemove.length}* miembros correctamente.`
       }, { quoted: m });
 
     } catch (e) {
