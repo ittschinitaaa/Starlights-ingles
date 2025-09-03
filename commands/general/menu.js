@@ -56,7 +56,7 @@ module.exports = {
         buttons: [
           { buttonId: `#creador`, buttonText: { displayText:"#creador" }, type: 1 },
           { buttonId: `#info`, buttonText: { displayText: "#info" }, type: 1 },
-          { buttonId: `#admins`, buttonText: { displayText: "#admins" }, type: 1 }
+          { buttonId: `#ping`, buttonText: { displayText: "#ping" }, type: 1 }
         ],
         headerType: 4
       }, { quoted: m });
