@@ -10,7 +10,7 @@ module.exports = {
 
 > ¡𝐇𝐨𝐥𝐚!𝐒𝐨𝐲 𝐒𝐭𝐚𝐫𝐥𝐢𝐠𝐡𝐭𝐬, 𝐄𝐬𝐭𝐚 𝐞𝐬 𝐦𝐢 𝐌𝐞𝐧𝐮.
 > 𝐕𝐢𝐬𝐢𝐭𝐚 𝐥𝐚𝐬 𝐫𝐞𝐝𝐞𝐬 𝐝𝐞 𝐦𝐢 𝐂𝐫𝐞𝐚𝐝𝐨𝐫𝐚.
-
+𝐋𝐈𝐍𝐊:https://atom.bio/itss_mia_oficial
 
 - ✨ᩧ　ׅ　ׄ  ⁞⁞ 𝐃𝔼𝐒ℂ𝐀ℝ𝐆𝔸
  ᮫໋۟۟۟۟۟⌯ ᤳ݄፞🌟꯭݃ #drive
@@ -51,7 +51,7 @@ module.exports = {
 `;
 
       await client.sendMessage(m.chat, {
-        image: { url: "https://telegra.ph/file/6d85c18b5fced13fd4bd3.jpg" }, // 🌸 Aquí cambias la imagen
+        image: { url: "https://files.catbox.moe/sklz18.png" }, // 🌸 Aquí cambias la imagen
         caption: menuText,
         buttons: [
           { buttonId: `${prefix}creador`, buttonText: { displayText: "👑 Creador" }, type: 1 },
