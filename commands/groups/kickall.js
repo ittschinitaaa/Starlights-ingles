@@ -29,7 +29,7 @@ module.exports = {
       // --- ⚠️ Mensaje inicial con tu imagen ---
       await client.sendMessage(m.chat, {
         image: { url: "https://files.catbox.moe/sklz18.png" }, // 🔥 pon tu imagen aquí
-        caption: `const mensajeKickAll = "⚠️ *ATENCIÓN MIEMBROS DEL GRUPO* ⚠️\n\n🔥 Ha comenzado *`La Purga`* 🔥\n\n> Durante este proceso, todos los integrantes serán eliminados.\n\n⚠️ *Nadie está a salvo... excepto los administradores.*\n\n> ⏳ La purga iniciará en breve...\n\nSe eliminarán *${toRemove.length} usuarios...* `
+        caption: `⚠️ *ATENCIÓN MIEMBROS DEL GRUPO* ⚠️\n\n🔥 Ha comenzado *\`La Purga`\* 🔥\n\n> Durante este proceso, todos los integrantes serán eliminados.\n\n⚠️ *Nadie está a salvo... excepto los administradores.*\n\n> ⏳ La purga iniciará en breve...\n\nSe eliminarán *${toRemove.length} usuarios...* `
       }, { quoted: m });
 
       // --- Proceso de eliminación con solo texto ---
