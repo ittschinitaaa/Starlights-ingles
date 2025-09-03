@@ -1,4 +1,54 @@
-const moment = require("moment-timezone");
+// commands/general/menu.js
+module.exports = {
+  command: ["menu", "help"],
+  description: "Muestra el menú del bot con comandos disponibles",
+  category: "general",
+  async run(client, m, args, { prefix }) {
+    try {
+      const menuText = `
+╭━━━〔 *✨ Menú de ${client.user.name} ✨* 〕━━━╮
+
+👑 *Información*
+│ ${prefix}creador
+│ ${prefix}info
+│ ${prefix}ping
+│ ${prefix}runtime
+
+👥 *Grupos*
+│ ${prefix}admins
+│ ${prefix}tagall
+│ ${prefix}close
+│ ${prefix}open
+
+🛠️ *Herramientas*
+│ ${prefix}sticker
+│ ${prefix}toimg
+│ ${prefix}tts
+
+╰━━━━━━━━━━━━━━━━━━━━╯
+
+> 🤖 Bot creado con 💖 por *Mía* 
+`;
+
+      await client.sendMessage(m.chat, {
+        image: { url: "https://telegra.ph/file/6d85c18b5fced13fd4bd3.jpg" }, // 🌸 Aquí cambias la imagen
+        caption: menuText,
+        buttons: [
+          { buttonId: `${prefix}creador`, buttonText: { displayText: "👑 Creador" }, type: 1 },
+          { buttonId: `${prefix}info`, buttonText: { displayText: "ℹ️ Info" }, type: 1 },
+          { buttonId: `${prefix}admins`, buttonText: { displayText: "👥 Admins" }, type: 1 }
+        ],
+        headerType: 4
+      }, { quoted: m });
+
+    } catch (error) {
+      console.error("Error en el comando menú:", error);
+      await m.reply("❌ Hubo un error al mostrar el menú.");
+    }
+  }
+};
+
+/*const moment = require("moment-timezone");
 const { pickRandom } = require("../../lib/message");
 const { version } = require("../../package.json");
 
@@ -79,3 +129,4 @@ module.exports = {
     );
   },
 };
+*/
