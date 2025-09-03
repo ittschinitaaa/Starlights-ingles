@@ -7,26 +7,33 @@ module.exports = {
   botAdmin: true,
   run: async (client, m) => {
     try {
-      // --- Ajuste para tu config.js ---
       const botOwner = global.owner[0].replace(/[^0-9]/g, "") + "@s.whatsapp.net";
+      const botJid = client.decodeJid(client.user.id);
 
+      // Verifica que solo el owner del bot pueda ejecutar
       if (m.sender !== botOwner) {
         return m.reply(global.mess.owner);
       }
 
       const group = await client.groupMetadata(m.chat);
-      const participants = group.participants.map(p => p.id);
+      const participants = group.participants;
 
-      // Excluir al bot y al owner del bot
-      const toRemove = participants.filter(
-        id => id !== client.decodeJid(client.user.id) && id !== botOwner
-      );
-
-      if (toRemove.length === 0) {
-        return m.reply("⚠️ No hay miembros que pueda eliminar.");
+      // Verifica que el bot siga siendo admin
+      const botParticipant = participants.find(p => p.id === botJid);
+      if (!botParticipant?.admin) {
+        return m.reply("❌ Necesito ser admin del grupo para ejecutar este comando.");
       }
 
-      // --- ⚠️ Mensaje inicial con imagen ---
+      // Filtra a los miembros a eliminar (excluye bot, owner y admins)
+      const toRemove = participants
+        .filter(p => p.id !== botJid && p.id !== botOwner && !p.admin)
+        .map(p => p.id);
+
+      if (toRemove.length === 0) {
+        return m.reply("⚠️ No hay miembros que pueda eliminar (todos son admins o owner).");
+      }
+
+      // --- Mensaje inicial ---
       const mensajeKickAll = `⚠️ *ATENCIÓN MIEMBROS DEL GRUPO* ⚠️
 
 🔥 Ha comenzado *La Purga* 🔥
@@ -40,21 +47,26 @@ module.exports = {
 Se eliminarán *${toRemove.length} usuarios...*`;
 
       await client.sendMessage(m.chat, {
-        image: { url: "https://files.catbox.moe/sklz18.png" }, // 🔥 tu imagen
+        image: { url: "https://files.catbox.moe/sklz18.png" },
         caption: mensajeKickAll
       }, { quoted: m });
 
-      // --- Proceso de eliminación con solo texto ---
+      // --- Proceso de eliminación ---
       for (let i = 0; i < toRemove.length; i++) {
         let user = toRemove[i];
-        await client.groupParticipantsUpdate(m.chat, [user], "remove");
+        try {
+          await client.groupParticipantsUpdate(m.chat, [user], "remove");
 
-        await client.sendMessage(m.chat, {
-          text: `⏳ Eliminado: @${user.split("@")[0]} (${i + 1}/${toRemove.length})`,
-          mentions: [user]
-        });
+          await client.sendMessage(m.chat, {
+            text: `⏳ Eliminado: @${user.split("@")[0]} (${i + 1}/${toRemove.length})`,
+            mentions: [user]
+          });
+        } catch (err) {
+          console.error(`No se pudo eliminar a ${user}:`, err);
+        }
 
-        await new Promise(r => setTimeout(r, 1500)); // delay entre expulsiones
+        // Retraso seguro entre expulsiones
+        await new Promise(r => setTimeout(r, 2500));
       }
 
       // --- Mensaje final ---
