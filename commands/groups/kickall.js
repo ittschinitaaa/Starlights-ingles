@@ -1,91 +1,3 @@
-// commands/groups/kickall.js
-module.exports = {
-  command: ["kickall"],
-  description: "Elimina a todos los miembros del grupo (solo creador del bot)",
-  category: "groups",
-  isGroup: true,
-  botAdmin: true,
-  run: async (client, m) => {
-    try {
-      const botOwner = global.owner[0].replace(/[^0-9]/g, "") + "@s.whatsapp.net";
-      const botJid = client.decodeJid(client.user.id);
-
-      // Solo el owner puede ejecutar
-      if (m.sender !== botOwner) return m.reply(global.mess.owner);
-
-      const group = await client.groupMetadata(m.chat);
-      const participants = group.participants;
-
-      // --- Calcular admins manualmente ---
-      const admins = participants
-        .filter(p => p.admin === "admin" || p.admin === "superadmin")
-        .map(p => p.id);
-
-      // Verifica si el bot es admin
-      if (!admins.includes(botJid)) {
-        return m.reply("❌ Necesito ser admin del grupo para ejecutar este comando.");
-      }
-
-      // Filtra miembros a eliminar (excluye bot, owner y admins)
-      const toRemove = participants
-        .filter(p => p.id !== botJid && p.id !== botOwner && !admins.includes(p.id))
-        .map(p => p.id);
-
-      if (toRemove.length === 0) {
-        return m.reply("⚠️ No hay miembros que pueda eliminar (todos son admins o owner).");
-      }
-
-      // --- Mensaje inicial ---
-      const mensajeKickAll = `⚠️ *ATENCIÓN MIEMBROS DEL GRUPO* ⚠️
-
-🔥 Ha comenzado *La Purga* 🔥
-
-> Durante este proceso, todos los integrantes serán eliminados.
-
-⚠️ *Nadie está a salvo... excepto los administradores.*
-
-> ⏳ La purga iniciará en breve...
-
-Se eliminarán *${toRemove.length} usuarios...*`;
-
-      await client.sendMessage(m.chat, {
-        image: { url: "https://files.catbox.moe/sklz18.png" },
-        caption: mensajeKickAll
-      }, { quoted: m });
-
-      // --- Proceso de eliminación ---
-      for (let i = 0; i < toRemove.length; i++) {
-        const user = toRemove[i];
-        try {
-          await client.groupParticipantsUpdate(m.chat, [user], "remove");
-
-          await client.sendMessage(m.chat, {
-            text: `⏳ Eliminado: @${user.split("@")[0]} (${i + 1}/${toRemove.length})`,
-            mentions: [user]
-          });
-        } catch (err) {
-          console.error(`No se pudo eliminar a ${user}:`, err);
-        }
-
-        // Retraso seguro entre expulsiones
-        await new Promise(r => setTimeout(r, 2500));
-      }
-
-      // --- Mensaje final ---
-      const mensajeFinal = `🕛 *La Purga ha terminado.*
-
-🔥 *Los miembros fueron eliminados...*
-> Se eliminaron *${toRemove.length}* miembros correctamente.`;
-
-      await client.sendMessage(m.chat, { text: mensajeFinal }, { quoted: m });
-
-    } catch (e) {
-      console.error(e);
-      m.reply("❌ No se pudo ejecutar el comando kickall.");
-    }
-  },
-};
-/*
 module.exports = {
   command: ["kickall"],
   description: "Elimina a todos los miembros del grupo (solo creador del bot)",
@@ -130,12 +42,7 @@ module.exports = {
         });
 
         await new Promise(r => setTimeout(r, 1500)); // delay entre expulsiones
-      }
-
-      // --- Mensaje final solo texto ---
-      await client.sendMessage(m.chat, {
-        text: `🕛 *La Purga ha terminado.*\n\n🔥 *los miembros fueron eliminados...*\n> Se eliminaron *${toRemove.length}* miembros correctamente.`
-      }, { quoted: m });
+    }
 
     } catch (e) {
       console.error(e);
@@ -143,4 +50,4 @@ module.exports = {
     }
   },
 };
-*/
+
