@@ -16,8 +16,7 @@ module.exports = {
       year: "numeric",
     });
 
-    let stickerTxT = "Lurus";
-    let stickerTxT2 = "Stickers";
+    let stickerTxT2 = "- 🌟ᩧ　ׅ　ׄ　⁞⁞ 𝐒𝕋𝐀ℝ𝐋𝕀𝐆ℍ𝐓S\n໋۟۟۟۟۟⌯ ᤳ݄፞🔥꯭݃ 𝐏𝕆𝐖𝔼𝐑𝔼𝐃 𝔹𝐘 ℂ𝐇𝕀𝐍𝕀𝐓𝔸";
 
     if (/image/.test(mime)) {
       media = await quoted.download();
