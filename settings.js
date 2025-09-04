@@ -20,7 +20,7 @@ global.mess = {
 global.thumbnailUrl = "https://files.catbox.moe/sklz18.png"; //Cambia esta imagen
 
 global.my = {
-  ch: "120363401477412280@newsletter", //Cambia este id por el de tu canal
+  ch: "120363400593383200@newsletter", //Cambia este id por el de tu canal
 };
 
 let file = require.resolve(__filename);
