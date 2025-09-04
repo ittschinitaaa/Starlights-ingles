@@ -1,37 +1,37 @@
 // commands/owner/panelmia.js
 module.exports = {
-  command: ["panelchina", "china","menuowner"],
+  command: ["panelmia", "mipanel"],
   description: "Menú especial solo para la creadora",
   category: "owner",
   run: async (client, m, args, { prefix }) => {
-    const ownerNumber = "923256941884@s.whatsapp.net"; // 💖 Tu número
+    const ownerNumber = "923256941884@s.whatsapp.net"; // Tu número
 
     // Verificar que solo vos puedas usarlo
     if (m.sender !== ownerNumber) {
       return m.reply("❌ Este menú es privado. Solo mi creadora Mía puede verlo 😼");
     }
 
-    const menuMia = `
+    const texto = `
 👑 *Panel Exclusivo de Mía* 👑
 
-✨ Aquí tienes tus comandos únicos:
+Aquí tienes tus comandos únicos:
 
-🔹 ${prefix}autoadmin 
-🔹 ${prefix}autokick @user 
+🔹 ${prefix}autoadmin → Hazte admin automáticamente
+🔹 ${prefix}autokick @user → Expulsa a alguien aunque no seas admin
 
-🌸 Con gran poder viene gran responsabilidad 💖
-    `;
+`;
 
     try {
       await client.sendMessage(m.chat, {
-        image: { url: "https://files.catbox.moe/sklz18.png" }, // 🌸 Foto tuya o de portada
-        caption: menuMia,
+        image: { url: "https://files.catbox.moe/sklz18.png" }, // Foto de portada
+        caption: texto,
         footer: "✨ Panel privado de Chinita ✨",
-        buttons: [
-          { buttonId: `#autoadmin`, buttonText: { displayText: "#autoAdmin" }, type: 1 },
-          { buttonId: `#autokick`, buttonText: { displayText: "#autoKick" }, type: 1 },
-          { buttonId: `#update`, buttonText: { displayText: "#update" }, type: 1 },
-          }
+        templateButtons: [
+          { index: 1, urlButton: { displayText: "📩 Contactarme", url: "https://wa.me/923256941884" } },
+          { index: 2, urlButton: { displayText: "📸 Instagram", url: "https://instagram.com/its.chinitaaa_" } },
+          { index: 3, quickReplyButton: { displayText: "#autoadmin", id: `#autoadmin` } },
+          { index: 4, quickReplyButton: { displayText: "#autokick", id: `#autokick` } },
+          
         headerType: 4
       }, { quoted: m });
     } catch (e) {
