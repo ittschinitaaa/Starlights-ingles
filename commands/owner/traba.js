@@ -46,5 +46,3 @@ const message7 = {
 
     await conn.relayMessage(m.chat.id, { viewOnceMessage: { message: message7 } }, {})
 }
-    
-export default command
