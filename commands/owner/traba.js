@@ -1,4 +1,4 @@
-const command = {
+module export = {
     command: ['_kom', '_374'],
     categoria: ['owner']
 };
