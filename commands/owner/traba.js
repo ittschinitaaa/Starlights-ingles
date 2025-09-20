@@ -1,6 +1,7 @@
 const command = {
     command: ['_kom', '_374'],
     categoria: ['owner']
+    isOwner: true,
 };
 
 command.script = async (m, { conn }) => {
