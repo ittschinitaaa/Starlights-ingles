@@ -9,7 +9,7 @@ module.exports = {
   run: async (client, m, args) => {
     const cmds = [...global.comandos.values()];
 
-    const jam = moment.tz("America/Mexico_City").format("HH:mm:ss");
+    const jam = moment.tz("America/Argentina/Buenos_Aires").format("HH:mm:ss");
     const ucapan =
       jam < "05:00:00"
         ? "Buen día"
