@@ -1,16 +1,3 @@
-/**
- * ================================
- *      𝐒𝐓𝐀𝐑𝐋𝐈𝐆𝐇𝐓𝐒 - 𝐌𝐈𝐍𝐈 𝐁𝐎𝐓
- * ================================
- * Creado por: China
- * Año: 2025
- * Librería: Baileys
- * 
- * Nota: No borres los créditos, ni te pongas
- * créditos que no son tuyos, respeta el trabajo.
- * ================================
- **/
-
 require("./settings");
 require("./lib/database");
 const {
