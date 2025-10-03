@@ -81,7 +81,7 @@ print("Baileys", `WhiskeySockets/baileys`);
 print(
   "Fecha & Tiempo",
   new Date().toLocaleString("en-US", {
-    timeZone: "America/Mexico_City",
+    timeZone: "America/Argentina/Buenos_Aires",
     hour12: false,
   }),
 );
@@ -104,7 +104,7 @@ async function startBot() {
   if (!client.authState.creds.registered) {
     const phoneNumber = await question(
       log.warn("Ingrese su número de WhatsApp\n") +
-        log.info("Ejemplo: 5212345678900\n"),
+        log.info("Ejemplo: 573243768166\n"),
     );
     try {
       log.info("Solicitando código de emparejamiento...");
