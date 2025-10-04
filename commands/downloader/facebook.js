@@ -14,7 +14,7 @@ module.exports = {
 
     if (!args[0].match(/facebook\.com|fb\.watch|video\.fb\.com/)) {
       return m.reply(
-        "El enlace no parece *válido*. Asegúrate de que sea de *Facebook*",
+        "El enlace no parece *válido*. Asegúrate de que sea de *Facebook.*",
       );
     }
 
