@@ -1,3 +1,5 @@
+// codigo creado por china
+// github: github.com/ittschinitaaa
 module.exports = {
   command: ["setdesc", "descripcion"],
   description: "Cambia la descripción del grupo",
