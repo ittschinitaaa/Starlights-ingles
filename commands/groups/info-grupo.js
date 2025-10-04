@@ -1,4 +1,5 @@
-// codigo creado por: Chinita 🇨🇳
+// codigo creado por china
+// github.com/ittschinitaaa
 module.exports = {
   command: ["infogrupo", "groupinfo"],
   description: "Muestra información del grupo",
