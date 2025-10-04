@@ -19,9 +19,9 @@ module.exports = {
       let file = await dropbox(url);
 
       let caption = `DropBox\n
-*Nombre* › ${file.fileName}\n
-*Tamaño* › ${file.fileSize}\n
-*Tipo* › ${file.mimetype}`;
+🌟 *Nombre* › ${file.fileName}\n
+🪐 *Tamaño* › ${file.fileSize}\n
+🌕 *Tipo* › ${file.mimetype}`;
 
       await client.sendMessage(
         m.chat,
