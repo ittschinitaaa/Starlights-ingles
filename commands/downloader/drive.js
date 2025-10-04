@@ -13,7 +13,7 @@ module.exports = {
     }
 
     if (!args[0].match(/drive\.google\.com\/(file\/d\/|open\?id=|uc\?id=)/)) {
-      return m.reply("La URL no parece válida de Google Drive");
+      return m.reply("La URL no parece válida de Google Drive.");
     }
 
     await m.reply(mess.wait);
