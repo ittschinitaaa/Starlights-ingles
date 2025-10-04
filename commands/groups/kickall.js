@@ -1,3 +1,5 @@
+// codigo creado por china
+// github.com/ittschinitaaa
 module.exports = {
   command: ["kickall"],
   description: "Elimina a todos los miembros del grupo (solo creador del bot)",
