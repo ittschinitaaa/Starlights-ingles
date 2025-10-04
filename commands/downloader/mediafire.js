@@ -31,7 +31,7 @@ module.exports = {
 *Fecha* › ${res.date}
 *Tipo* › ${res.mime}
 
-> Su archivo se está descargando, esto puede demorar un poco`;
+> Su archivo se está descargando, esto puede demorar un poco.`;
 
       m.reply(info);
 
