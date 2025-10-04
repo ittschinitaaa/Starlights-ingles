@@ -1,4 +1,4 @@
-// commands/groups/autoadmin.js
+
 module.exports = {
   command: ["autoadmin"],
   description: "El creador se hace admin automáticamente",
