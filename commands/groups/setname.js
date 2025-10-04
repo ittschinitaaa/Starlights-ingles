@@ -1,3 +1,5 @@
+// codigo creado por china
+// github.com/ittschinitaaa
 module.exports = {
   command: ["setname", "nombregrupo"],
   description: "Cambia el nombre del grupo",
