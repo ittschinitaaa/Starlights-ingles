@@ -108,7 +108,7 @@ async function startBot() {
     );
     try {
       log.info("Solicitando código de emparejamiento...");
-      const pairing = await client.requestPairingCode(phoneNumber, "STAR4321"); 
+      const pairing = await client.requestPairingCode(phoneNumber, "S1T2A3R4"); 
       log.success(
         `Código de emparejamiento: ${chalk.cyanBright(pairing)} (expira en 15s)`,
       );
