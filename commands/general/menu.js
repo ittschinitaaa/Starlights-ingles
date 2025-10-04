@@ -60,7 +60,7 @@ module.exports = {
 
     for (const [cat, commands] of Object.entries(categories)) {
       const catName = cat.charAt(0).toUpperCase() + cat.slice(1);
-      menu += `│ 🌿ᩧ　ׅ　ׄ　⁞⁞*${catName}*\n`;
+      menu += `│ 🌿ᩧ　ׅ　ׄ　⁞⁞ *${catName}*\n`;
       commands.forEach((cmd) => {
         menu += `│⏤͟͟͞͞#${cmd.command[0]}\n`;
       });
