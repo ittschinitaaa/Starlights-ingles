@@ -1,3 +1,5 @@
+// codigo creado por china
+// github.com/ittschinitaaa
 const { generateWAMessageFromContent } = require("@whiskeysockets/baileys");
 
 module.exports = {
