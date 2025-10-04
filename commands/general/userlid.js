@@ -27,7 +27,7 @@ module.exports = {
       m.reply(info)
     } catch (e) {
       console.error(e)
-      m.reply("❌ Ocurrió un error al obtener el LID.")
+      m.reply("❌ Ocurrió un error al obtener el LID-JID.")
     }
   },
 }
