@@ -1,4 +1,5 @@
-// codigo creado por: Chinita 🇨🇳
+// codigo creado por china
+// github.com/ittschinitaaa
 module.exports = {
   command: ["link", "linkgrupo", "grouplink"],
   description: "Muestra el link de invitación del grupo",
