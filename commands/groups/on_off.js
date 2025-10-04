@@ -1,3 +1,5 @@
+// codigo creado por china
+// github.com/ittschinitaaa
 module.exports = {
   command: ["on", "off"],
   description: "Activa o desactiva funciones del grupo",
