@@ -24,12 +24,12 @@ module.exports = {
 
     const msg = `Hola, ${userTag}
 
-\`Ping Status\`
+🌟 \`Ping Status\`
 
-\`Ping:\` ${latency} ms
-\`Uptime:\` [ ${h}h ${min}m ${s}s ]
-\`RAM usada:\` ${ram} MB
-\`Usuario ID:\` @${sender}`.trim();
+🕑 \`Ping:\` ${latency} ms
+⏰ \`Uptime:\` [ ${h}h ${min}m ${s}s ]
+💻 \`RAM usada:\` ${ram} MB
+👤 \`Usuario ID:\` @${sender}`.trim();
 
     await client.sendMessage(
       m.chat,
