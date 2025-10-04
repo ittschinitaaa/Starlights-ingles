@@ -39,7 +39,7 @@ module.exports = {
       reloadCommands(baseDir);
       let msg = "";
       if (stdout.includes("Already up to date.")) {
-        msg = "*Estado:* Todo está actualizado";
+        msg = "*Estado:* Todo está actualizado.";
       } else {
         msg = `*Actualización completada*\n\n${stdout}`;
       }
