@@ -20,7 +20,7 @@ module.exports = {
     const host = os.hostname();
     const shell = process.env.SHELL || process.env.COMSPEC || "desconocido";
     const now = new Date().toLocaleString("en-US", {
-      timeZone: "America/Mexico_City",
+      timeZone: "America/Argentina/Buenos_Aires",
       hour12: false,
     });
 
