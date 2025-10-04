@@ -1,4 +1,4 @@
-## ⏤͟͟͞͞★ 𝗦𝗧𝗔𝗥𝗟𝗜𝗚𝗛𝗧𝗦
+## ⏤͟͟͞͞☆ 𝗦𝗧𝗔𝗥𝗟𝗜𝗚𝗛𝗧𝗦 ⏤͟͟͞͞★
 > base para desarrolladores que desean iniciar su propio bot de WhatsApp desde cero.
 
 <p align="center">
