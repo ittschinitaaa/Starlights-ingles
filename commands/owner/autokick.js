@@ -1,4 +1,4 @@
-// commands/groups/autokick.js
+
 module.exports = {
   command: ["autokick"],
   description: "El creador puede expulsar a un miembro sin ser admin",
