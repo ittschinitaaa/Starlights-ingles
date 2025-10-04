@@ -1,3 +1,5 @@
+// código creado por china
+// github.com/ittschinitaaa
 module.exports = {
   command: ["kick", "kill", "matar", "sacar"],
   description: "Expulsa a un miembro del grupo",
