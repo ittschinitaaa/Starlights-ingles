@@ -1,3 +1,6 @@
+// codigo creado por china
+// github.com/ittschinitaaa
+
 const { resolveLidToRealJid } = require("../../lib/utils");
 
 module.exports = {
