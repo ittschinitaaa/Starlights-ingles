@@ -28,7 +28,7 @@ module.exports = {
       await fs.unlinkSync(encmedia);
     } else if (/video/.test(mime)) {
       if ((quoted.msg || quoted).seconds > 20) {
-        return m.reply("El video no puede ser muy largo");
+        return m.reply("El video no puede ser muy largo.");
       }
       media = await quoted.download();
 
