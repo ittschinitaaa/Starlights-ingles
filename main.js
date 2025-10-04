@@ -1,4 +1,4 @@
-arequire("./settings");
+require("./settings");
 const fs = require("fs");
 const path = require("path");
 const moment = require("moment");
