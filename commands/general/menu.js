@@ -66,7 +66,7 @@ module.exports = {
       commands.forEach((cmd) => {
         menu += `│ • #${cmd.command[0]}\n`;
       });
-      menu += `└─────────────┘\n\n`;
+      menu += `└──────────┘\n\n`;
     }
 
     menu += `💫 ¡Usa #comando para ejecutarlos!`;
