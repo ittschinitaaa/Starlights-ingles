@@ -9,12 +9,12 @@ global.author = "𝐂𝐡𝐢𝐧𝐚 | 𝐒𝐭𝐚𝐫𝐥𝐢𝐠𝐡𝐭𝐬
 
 //Modifica los mensajes a tu preferencia
 global.mess = {
-  admin: "→ Esta función está reservada para los administradores del grupo",
-  botAdmin: "→ Para ejecutar esta función debo ser administrador",
-  owner: "→ Solo mi creador puede usar este comando",
-  group: "→ Esta función solo funciona en grupos",
-  private: "→ Esta función solo funciona en mensajes privados",
-  wait: "→ Espera un momento...",
+  admin: "> ☆ Esta función está reservada para los administradores del grupo",
+  botAdmin: "> ☆ Para ejecutar esta función debo ser administrador",
+  owner: "> ☆ Solo mi creador puede usar este comando",
+  group: "> ☆ Esta función solo funciona en grupos",
+  private: "> ☆ Esta función solo funciona en mensajes privados",
+  wait: "> ☆ Espera un momento...",
 };
 
 global.thumbnailUrl = "https://files.catbox.moe/sklz18.png"; //Cambia esta imagen
