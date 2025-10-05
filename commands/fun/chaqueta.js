@@ -15,7 +15,7 @@ module.exports = {
     let chaqueta = [
       `${emoji} Iniciando chaqueta...`,
       '╭━━╮╭╭╭╮\n┃▔╲┣╈╈╈╈━━━╮\n┃┈┈▏.╰╯╯╯╭╮━┫\n┃┈--.╭━━━━╈╈━╯\n╰━━╯-.                ╰╯',
-      `*[ 🔥 ] @${m.sender.split('@')[0]} SE HA CORRIDO GRACIAS A @${who.split('@')[0]} EN STARLIGHTS.*`,
+      `*[ 🔥 ] @${m.sender.split('@')[0]} SE HA CORRIDO GRACIAS A @${who.split('@')[0]}.*`,
     ];
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
