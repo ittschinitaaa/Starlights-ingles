@@ -56,6 +56,7 @@ module.exports = {
 │  𝐕𝐞𝐫𝐬𝐢𝐨́𝐧  : ${version}
 │  𝐌𝐨𝐭𝐨𝐫    : 𝐁𝐚𝐢𝐥𝐞𝐲𝐬
 │
+╰─────────────╯
 `;
 
     for (const [cat, commands] of Object.entries(categories)) {
