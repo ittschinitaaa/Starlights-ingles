@@ -53,8 +53,9 @@ module.exports = {
     let menu = `╭─❮ *𝐒𝐓𝐀𝐑𝐋𝐈𝐆𝐇𝐓𝐒 𝐌𝐄𝐍𝐔* ❯─╮
 │
 │  ${ucapan}, *${m.pushName || "Usuario"}*
+│
 │  ☆ ${namebot}
-│  ★ Creador: China 🇨🇳
+│  ★ Creadora: 𝕮𝖍𝖎𝖓𝖆 🔥🇨🇳
 │  ☆ Versión: ${version}
 │  ★ Motor: Baileys
 │
