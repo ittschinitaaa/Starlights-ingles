@@ -77,15 +77,14 @@ module.exports = {
       {
         image: { url: "https://files.catbox.moe/sklz18.png" },
         caption: menu,
-        // inicio de info del menu
+        
         contextInfo: {
   forwardingScore: 0,
   isForwarded: true,
   forwardedNewsletterMessageInfo: {
     newsletterJid: "120363345778623279@newsletter", // el ID del canal
     serverMessageId: "1",
-    newsletterName: "Senko Commands"
-    // fin de info del menu
+    newsletterName: "𝐒𝐭𝐚𝐫𝐥𝐢𝐠𝐡𝐭𝐬 𝐜𝐡𝐚𝐧𝐧𝐞𝐥 𝐨𝐟𝐟𝐢𝐜𝐢𝐚𝐥"
   }
  }
       },
