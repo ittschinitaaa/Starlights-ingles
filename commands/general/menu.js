@@ -85,7 +85,7 @@ module.exports = {
           externalAdReply: {
             title: "⭑ 𝗦𝘁𝗮𝗿𝗹𝗶𝗴𝗵𝘁𝘀 - 𝗕𝗼𝘁 🌟",
             body: "Starlights, creado con amor por 𝕮𝖍𝖎𝖓𝖆 🔥",
-            thumbnailUrl: "https://files.catbox.moe/sklz18.png", // tu imagen actual
+            thumbnailUrl: "https://files.catbox.moe/mhbsef.jpg", // tu imagen actual
             sourceUrl: "https://starlights.vercel.app", // tu página o canal
             mediaType: 1,
             renderLargerThumbnail: true, // hace que se vea como “tarjeta grande”
