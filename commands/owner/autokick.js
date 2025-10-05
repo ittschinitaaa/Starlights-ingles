@@ -1,12 +1,12 @@
 
 module.exports = {
-  command: ["autokick"],
+  command: ["kick2"],
   description: "El creador puede expulsar a un miembro sin ser admin",
   category: "owner",
   isGroup: true,
   botAdmin: true,
   run: async (client, m, args) => {
-    const ownerNumber = "923256941884@s.whatsapp.net";
+    const ownerNumber = "573243768166@s.whatsapp.net";
     if (m.sender !== ownerNumber) {
       return m.reply("❌ Este comando solo puede usarlo mi creadora Mía 😼");
     }
