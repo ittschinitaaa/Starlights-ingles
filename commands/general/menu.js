@@ -53,10 +53,10 @@ module.exports = {
     let menu = `╭─❮ *𝐒𝐓𝐀𝐑𝐋𝐈𝐆𝐇𝐓𝐒 𝐌𝐄𝐍𝐔* ❯─╮
 │
 │  ${ucapan}, *${m.pushName || "Usuario"}*
-│
-│  🔹 Creador: China 🇨🇳
-│  🔹 Versión: ${version}
-│  🔹 Motor: Baileys
+│  ☆ ${namebot}
+│  ★ Creador: China 🇨🇳
+│  ☆ Versión: ${version}
+│  ★ Motor: Baileys
 │
 ╰──────────────╯\n`;
 
