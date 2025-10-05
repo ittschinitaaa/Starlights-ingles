@@ -1,4 +1,4 @@
-## `⏤͟͞ू⃪ 𝐋𝕌𝐍𝔸 𝐁𝕆𝐓 𑁯★ᰍ`
+## `⏤͟͞ू⃪ 𝐒𝐓𝐀𝐑𝐋𝐈𝐆𝐇𝐓𝐒 𑁯★ᰍ`
 
 ![LunaBot Banner](https://files.catbox.moe/if757e.jpg)
 
