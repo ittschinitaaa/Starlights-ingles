@@ -82,7 +82,7 @@ module.exports = {
   forwardingScore: 0,
   isForwarded: true,
   forwardedNewsletterMessageInfo: {
-    newsletterJid: "120363302354987654@newsletter", // el ID del canal
+    newsletterJid: "120363345778623279@newsletter", // el ID del canal
     serverMessageId: "1",
     newsletterName: "Senko Commands"
     // fin de info del menu
