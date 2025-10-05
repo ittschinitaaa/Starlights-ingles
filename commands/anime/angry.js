@@ -3,7 +3,7 @@
 module.exports = {
   command: ["angry", "enojado"],
   description: "Muestra un video de enojo dirigido a alguien o a ti mismo",
-  category: "fun",
+  category: "anime",
   isGroup: true,
   run: async (client, m, args) => {
     let who = m.mentionedJid && m.mentionedJid.length > 0
