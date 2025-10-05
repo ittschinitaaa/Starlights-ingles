@@ -3,7 +3,7 @@
 module.exports = {
   command: ["horario"],
   description: "Muestra la hora actual en varias zonas horarias",
-  category: "info",
+  category: "tools",
   run: async (client, m, args) => {
     const moment = require('moment-timezone');
 
