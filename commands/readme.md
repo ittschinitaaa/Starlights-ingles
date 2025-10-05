@@ -2,8 +2,8 @@
 
 ![LunaBot Banner](https://files.catbox.moe/if757e.jpg)
 
-📂 Aquí están todos los **comandos de LunaBot**.  
-Cada archivo `.js` en esta carpeta es un plugin ✨.
+📂 Aquí están todos los **comandos de Starlights**.  
+Cada carpeta tiene un archivo (comando).
 
 - 🛡️ Administración de grupos  
 - ℹ️ Información y menús  
@@ -12,9 +12,9 @@ Cada archivo `.js` en esta carpeta es un plugin ✨.
 
 ✨ Para crear un comando nuevo, solo agrega un archivo a la carpeta correspondiente.
 
-**ejemplo:**
+**ejemplos:**
 
-`si quieres agregar un comando para grupos va en la carpeta "group"`
+`si quieres agregar un comando para grupos va en la carpeta "groups"`
 
 ---
 
