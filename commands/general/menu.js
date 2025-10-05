@@ -84,7 +84,7 @@ module.exports = {
   forwardedNewsletterMessageInfo: {
     newsletterJid: "120363345778623279@newsletter", // cambia por el ID de tu canal
     serverMessageId: "1",
-    newsletterName: "⏤͟͟͞͞☆ 𝐒𝐓𝐀𝐑𝐋𝐈𝐆𝐇𝐓𝐒 𝐎𝐅𝐈𝐂𝐈𝐀𝐋 𝐂𝐇𝐀𝐍𝐍𝐄𝐋" // cambia por el nombre de tu canal
+    newsletterName: "⏤͟͟͞͞𝗦𝘁𝗮𝗿𝗹𝗶𝗴𝗵𝘁𝘀 𝗼𝗳𝗳𝗶𝗰𝗶𝗮𝗹 𝗖𝗵𝗮𝗻𝗻𝗲𝗹 🌟" // cambia por el nombre de tu canal
   }
  }
       },
