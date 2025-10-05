@@ -1,6 +1,6 @@
 ## `⏤͟͞ू⃪𝐒𝐓𝐀𝐑𝐋𝐈𝐆𝐇𝐓𝐒𑁯★ᰍ`
 
-![LunaBot Banner](https://files.catbox.moe/if757e.jpg)
+![LunaBot Banner](https://files.catbox.moe/sklz18.png)
 
 📂 Aquí están todos los **comandos de Starlights**.  
 Cada carpeta tiene un archivo (comando).
