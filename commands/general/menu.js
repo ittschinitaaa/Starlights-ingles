@@ -49,7 +49,7 @@ module.exports = {
     });
 
       await m.react("🌟");
-    // Cuerpo del menú
+    
     let menu = `
 ✼─────────────✼
 ★ ${ucapan}, *${m.pushName || "Usuario"}*
@@ -70,7 +70,6 @@ module.exports = {
 
     menu += `💫 Usa #comando para ejecutarlos`;
 
-    // Enviar mensaje estilo "canal"
     await client.sendMessage(
       m.chat,
       {
