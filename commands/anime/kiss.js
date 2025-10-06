@@ -1,3 +1,6 @@
+// codigo creado por China
+// github: github.com/ittschinitaaa
+
 const moment = require("moment-timezone");
 
 module.exports = {
