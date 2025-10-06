@@ -50,13 +50,13 @@ module.exports = {
 
     // Cuerpo del menú
     let menu = `
-✼───────────────✼
-☀️ ${ucapan}, *${m.pushName || "Usuario"}*
+✼─────────────✼
+★ ${ucapan}, *${m.pushName || "Usuario"}*
 ✿ 𝑩𝒊𝒆𝒏𝒗𝒆𝒏𝒊𝒅𝒐/𝒂 𝒂 ${global.namebot}
 ✿ 𝐕𝐞𝐫𝐬𝐢ó𝐧: ${version}
 ✿ 𝐂𝐫𝐞𝐚𝐝𝐨𝐫𝐚: 𝕮𝖍𝖎𝖓𝖆 🇨🇳
 ✿ 𝐋𝐢𝐛𝐫𝐞𝐫𝐢́𝐚: Baileys Multi Device
-✼───────────────✼\n`;
+✼─────────────✼\n`;
 
     for (const [cat, commands] of Object.entries(categories)) {
       const catName = cat.charAt(0).toUpperCase() + cat.slice(1);
