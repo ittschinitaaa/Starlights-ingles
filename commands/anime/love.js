@@ -3,7 +3,7 @@
 
 module.exports = {
   command: ["love", "amor", "enamorada"],
-  description: "Muestra que estás enamorad﹫ de alguien 💞",
+  description: "Muestra que estás enamorad@ de alguien",
   category: "anime",
   isGroup: true,
   isAdmin: false,
@@ -12,61 +12,56 @@ module.exports = {
 
   run: async (client, m, args) => {
     try {
-      let who = m.mentionedJid && m.mentionedJid.length > 0
-        ? m.mentionedJid[0]
-        : m.quoted
-          ? m.quoted.sender
-          : m.sender;
+      // --- detección de usuario objetivo ---
+      const who = m.mentionedJid?.[0] || (m.quoted ? m.quoted.sender : m.sender);
 
-      let name = await client.getName(who);
-      let name2 = await client.getName(m.sender);
+      // --- función segura para obtener nombres ---
+      const getDisplayName = async (jid) => {
+        try {
+          const contact = await client.onWhatsApp(jid);
+          if (contact && contact[0]?.notify) return contact[0].notify;
+          const info = await client.fetchStatus(jid).catch(() => null);
+          if (info?.status) return info.status;
+          return jid.split("@")[0];
+        } catch {
+          return jid.split("@")[0];
+        }
+      };
 
-      // Reacción
-      await m.react('💘');
+      const name = await getDisplayName(who);
+      const name2 = await getDisplayName(m.sender);
 
-      let frases = [
-        `💞 \`${name2}\` *está completamente enamorad﹫ de* \`${name || who}\` 💖`,
-        `💓 \`${name2}\` *no puede dejar de pensar en* \`${name || who}\` (⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)`,
-        `💗 \`${name2}\` *tiene mariposas en el estómago por* \`${name || who}\` 🦋`,
-        `💕 \`${name2}\` *está perdidamente enamorad﹫ de* \`${name || who}\` 💫`,
-        `💘 \`${name2}\` *está enamorad﹫ y se nota en su mirada* ✨`
-      ];
+      // --- texto principal ---
+      const str =
+        m.mentionedJid?.length > 0 || m.quoted
+          ? `💞 \`${name2}\` *está enamorad@ de* \`${name}\` 💖`
+          : `💞 \`${name2}\` *está enamorad@* 💗`;
 
-      let str;
-      if (m.mentionedJid && m.mentionedJid.length > 0 || m.quoted) {
-        str = frases[Math.floor(Math.random() * frases.length)];
-      } else {
-        str = `💗 \`${name2}\` *está enamorad﹫ y no quiere decir de quién...* (≧◡≦)`;
-      }
-
+      // --- lista de videos ---
       const videos = [
-        'https://telegra.ph/file/5fbd60c40ab190ecc8e1c.mp4',
-        'https://telegra.ph/file/ca30d358d292674698b40.mp4',
-        'https://telegra.ph/file/25f88386dd7d4d6df36fa.mp4',
-        'https://telegra.ph/file/eb63131df0de6b47c7ab7.mp4',
-        'https://telegra.ph/file/209990ee46c645506a5fc.mp4',
-        'https://telegra.ph/file/440f276fcbb2d04cbf1d1.mp4',
-        'https://telegra.ph/file/42cea67d9b013ed9a9cd0.mp4',
-        'https://telegra.ph/file/bc0f47b8f3fb9470bc918.mp4',
-        'https://telegra.ph/file/79ae875090b64ab247b7a.mp4'
+        "https://telegra.ph/file/5fbd60c40ab190ecc8e1c.mp4",
+        "https://telegra.ph/file/ca30d358d292674698b40.mp4",
+        "https://telegra.ph/file/25f88386dd7d4d6df36fa.mp4",
+        "https://telegra.ph/file/eb63131df0de6b47c7ab7.mp4",
+        "https://telegra.ph/file/209990ee46c645506a5fc.mp4",
+        "https://telegra.ph/file/440f276fcbb2d04cbf1d1.mp4",
+        "https://telegra.ph/file/42cea67d9b013ed9a9cd0.mp4",
+        "https://telegra.ph/file/bc0f47b8f3fb9470bc918.mp4",
+        "https://telegra.ph/file/79ae875090b64ab247b7a.mp4",
       ];
 
       const video = videos[Math.floor(Math.random() * videos.length)];
 
+      // --- enviar mensaje ---
+      await m.react("💖");
       await client.sendMessage(
         m.chat,
-        {
-          video: { url: video },
-          gifPlayback: true,
-          caption: str,
-          mentions: [who]
-        },
+        { video: { url: video }, gifPlayback: true, caption: str, mentions: [who] },
         { quoted: m }
       );
-
-    } catch (e) {
-      console.error(e);
-      await client.reply(m.chat, "❌ Hubo un error al ejecutar el comando *love*.", m);
+    } catch (err) {
+      console.error(err);
+      await client.reply(m.chat, "❌ Error al ejecutar el comando *love*.", m);
     }
   },
 };
