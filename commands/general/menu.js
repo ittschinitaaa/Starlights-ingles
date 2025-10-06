@@ -48,6 +48,7 @@ module.exports = {
       }
     });
 
+      await m.react("🌟");
     // Cuerpo del menú
     let menu = `
 ✼─────────────✼
