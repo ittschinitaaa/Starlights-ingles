@@ -8,7 +8,7 @@ const crypto = require("crypto");
 module.exports = {
   command: ["code", "pairingcode", "subbot"],
   description: "Genera un código para vincular un sub-bot a Starlights",
-  category: "subbots",
+  category: "jadibot",
   isPrivate: false,
   run: async (client, m) => {
     try {
