@@ -1,5 +1,5 @@
-// Bienvenida y despedida para Starlights
-// github: github.com/miaoficial02/Starlights
+// codigo creado por china
+// github: github.com/ittschinitaaa
 
 module.exports = {
   event: 'group-participants', // Se activa cuando alguien entra o sale
