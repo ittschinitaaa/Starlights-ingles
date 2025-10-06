@@ -12,23 +12,32 @@ module.exports = {
 
   run: async (client, m, args) => {
     try {
-      let who = m.mentionedJid && m.mentionedJid.length > 0
-        ? m.mentionedJid[0]
-        : m.quoted
-          ? m.quoted.sender
-          : m.sender;
+      // --- detección del usuario objetivo ---
+      const who = m.mentionedJid?.[0] || (m.quoted ? m.quoted.sender : m.sender);
 
-      let name = await client.getName(who);
-      let name2 = await client.getName(m.sender);
+      // --- obtener nombres seguros ---
+      const getDisplayName = async (jid) => {
+        try {
+          const contact = await client.onWhatsApp(jid);
+          if (contact && contact[0]?.notify) return contact[0].notify;
+          const info = await client.fetchStatus(jid).catch(() => null);
+          if (info?.status) return info.status;
+          return jid.split("@")[0];
+        } catch {
+          return jid.split("@")[0];
+        }
+      };
 
-      // Reacción al mensaje
-      await m.react('💋');
+      const name = await getDisplayName(who);
+      const name2 = await getDisplayName(m.sender);
 
-      let str =
-        m.mentionedJid && m.mentionedJid.length > 0 || m.quoted
-          ? `💋 \`${name2}\` besó a \`${name || who}\` ( ˘ ³˘)♥`
-          : `💋 \`${name2}\` se besó a sí mismo/a ( ˘ ³˘)♥`;
+      // --- mensaje base ---
+      const str =
+        m.mentionedJid?.length > 0 || m.quoted
+          ? `💋 \`${name2}\` besó a \`${name}\` ( ˘ ³˘)♥`
+          : `💋 \`${name2}\` se besó a sí mism@ ( ˘ ³˘)♥`;
 
+      // --- lista de videos ---
       const videos = [
         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745784879173.mp4",
         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745784874988.mp4",
@@ -44,24 +53,26 @@ module.exports = {
         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745784940220.mp4",
         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745784935466.mp4",
         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745784918972.mp4",
-        "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745784914086.mp4"
+        "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745784914086.mp4",
       ];
 
       const randomVideo = videos[Math.floor(Math.random() * videos.length)];
 
+      // --- enviar reacción y mensaje ---
+      await m.react("💋");
       await client.sendMessage(
         m.chat,
         {
           video: { url: randomVideo },
           gifPlayback: true,
           caption: str,
-          mentions: [who]
+          mentions: [who],
         },
         { quoted: m }
       );
-    } catch (error) {
-      console.error("Error en el comando kiss:", error);
-      await client.reply(m.chat, "⚠️ Ocurrió un error al ejecutar el comando.", m);
+    } catch (e) {
+      console.error(e);
+      await client.reply(m.chat, "❌ Error al ejecutar el comando *kiss*.", m);
     }
   },
 };
