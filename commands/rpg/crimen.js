@@ -1,77 +1,79 @@
-// código creado por Starlights
-// github: github.com/miaoficial02/Starlights
+// código RPG creado por China adaptado a Starlights
+// github: github.com/ittschinitaaa
+
+let cooldowns = {}
 
 module.exports = {
-  command: ["crimen", "crime"],
-  description: "Comete un crimen y roba monedas a otros usuarios",
-  category: "economy",
+  command: ['crimen', 'crime'],
+  description: 'Comete un crimen y gana o pierde coins',
+  category: 'economy',
   isGroup: true,
-  isAdmin: false,
-  botAdmin: false,
-  use: "",
-
-  run: async (client, m) => {
+  run: async (client, m, args) => {
     try {
       const users = global.db.data.users
       const senderId = m.sender
-      const senderName = await client.getName(senderId)
 
-      // --- cooldown ---
-      const cooldowns = global.cooldowns || {}
-      const tiempo = 5 * 60 * 1000 // 5 minutos en ms
-      if (cooldowns[senderId] && Date.now() - cooldowns[senderId] < tiempo) {
-        let restante = Math.ceil((cooldowns[senderId] + tiempo - Date.now()) / 1000)
-        let minutos = Math.floor(restante / 60)
-        let segundos = restante % 60
-        return client.sendMessage(
-          m.chat,
-          { text: `⏱️ Ya cometiste un crimen recientemente. Espera *${minutos}m ${segundos}s* antes de tu próximo intento.`, mentions: [senderId] },
-          { quoted: m }
-        )
+      // --- función para obtener nombre seguro ---
+      const getDisplayName = async (jid) => {
+        try {
+          const contact = await client.onWhatsApp(jid)
+          if (contact && contact[0]?.notify) return contact[0].notify
+          return jid.split("@")[0]
+        } catch {
+          return jid.split("@")[0]
+        }
+      }
+
+      const senderName = await getDisplayName(senderId)
+
+      // --- cooldown de 5 minutos ---
+      const tiempo = 5 * 60
+      if (cooldowns[senderId] && Date.now() - cooldowns[senderId] < tiempo * 1000) {
+        const tiempoRestante = segundosAHMS(Math.ceil((cooldowns[senderId] + tiempo * 1000 - Date.now()) / 1000))
+        return m.reply(`⏱️ Ya has cometido un crimen recientemente, espera *${tiempoRestante}* para tu próximo crimen.`)
       }
       cooldowns[senderId] = Date.now()
-      global.cooldowns = cooldowns
 
-      // --- elegir víctima aleatoria ---
+      const senderCoin = users[senderId].coin || 0
       let randomUserId = Object.keys(users)[Math.floor(Math.random() * Object.keys(users).length)]
+
       while (randomUserId === senderId) {
         randomUserId = Object.keys(users)[Math.floor(Math.random() * Object.keys(users).length)]
       }
 
-      const senderCoin = users[senderId].coin || 0
       const randomUserCoin = users[randomUserId].coin || 0
       const minAmount = 15
       const maxAmount = 50
       const amountTaken = Math.floor(Math.random() * (maxAmount - minAmount + 1)) + minAmount
+      const randomOption = Math.floor(Math.random() * 3)
 
-      const outcome = Math.floor(Math.random() * 3)
+      const randomUserName = await getDisplayName(randomUserId)
+      const moneda = '💸'
+      const emoji = '🕵️‍♂️'
+      const emoji2 = '❌'
 
-      switch (outcome) {
-        case 0: // crimen exitoso
+      switch (randomOption) {
+        case 0:
           users[senderId].coin += amountTaken
           users[randomUserId].coin -= amountTaken
           await client.sendMessage(
             m.chat,
-            { text: `💸 ¡Crimen exitoso! ${senderName} robó *${amountTaken} 💰* de @${randomUserId.split("@")[0]}`, mentions: [randomUserId] },
+            { text: `${emoji} ¡Lograste cometer tu crimen con éxito! Robaste *${amountTaken} ${moneda}* a @${randomUserName}`, contextInfo: { mentionedJid: [randomUserId] } },
             { quoted: m }
           )
           break
-        case 1: // atrapado
+        case 1:
           const amountSubtracted = Math.min(Math.floor(Math.random() * (senderCoin - minAmount + 1)) + minAmount, maxAmount)
           users[senderId].coin -= amountSubtracted
-          await client.sendMessage(
-            m.chat,
-            { text: `⚠️ Te atraparon mientras cometías el crimen, se te restaron *-${amountSubtracted} 💰*`, mentions: [senderId] },
-            { quoted: m }
-          )
+          await m.reply(`${emoji2} No fuiste cuidadoso y te atraparon. Se restaron *-${amountSubtracted} ${moneda}* a ${senderName}.`)
           break
-        case 2: // crimen parcial
+        case 2:
           const smallAmountTaken = Math.min(Math.floor(Math.random() * (randomUserCoin / 2 - minAmount + 1)) + minAmount, maxAmount)
           users[senderId].coin += smallAmountTaken
           users[randomUserId].coin -= smallAmountTaken
           await client.sendMessage(
             m.chat,
-            { text: `💥 Crimen detectado parcialmente. Solo lograste robar *${smallAmountTaken} 💰* de @${randomUserId.split("@")[0]}`, mentions: [randomUserId] },
+            { text: `${emoji} Lograste cometer tu crimen, pero te descubrieron y solo lograste tomar *${smallAmountTaken} ${moneda}* de @${randomUserName}`, contextInfo: { mentionedJid: [randomUserId] } },
             { quoted: m }
           )
           break
@@ -80,7 +82,15 @@ module.exports = {
       global.db.write()
     } catch (err) {
       console.error(err)
-      await client.sendMessage(m.chat, { text: "❌ Error al ejecutar el comando *crimen*." }, { quoted: m })
+      m.reply('❌ Ocurrió un error al ejecutar el comando.')
     }
   }
 }
+
+// --- función para convertir segundos a minutos y segundos ---
+function segundosAHMS(segundos) {
+  let horas = Math.floor(segundos / 3600)
+  let minutos = Math.floor((segundos % 3600) / 60)
+  let segundosRestantes = segundos % 60
+  return `${minutos} minutos y ${segundosRestantes} segundos`
+        }
