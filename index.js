@@ -59,6 +59,22 @@ const userInfoSyt = () => {
   }
 };
 
+//inicio
+cfonts.say('✧ Star ✧', {
+  font: 'block',        
+  align: 'center',
+  gradient: ['cyan', 'magenta'],
+  env: 'node'
+})
+
+
+cfonts.say('💎 made by China 📍', {
+  font: 'console',     
+  align: 'center',
+  gradient: ['cyan', 'white'],
+  env: 'node'
+})
+//fin
 console.log(
   chalk.yellow.bold(
     `╔═════[${`${chalk.yellowBright(userInfoSyt())}${chalk.white.bold("@")}${chalk.yellowBright(os.hostname())}`}]═════`,
