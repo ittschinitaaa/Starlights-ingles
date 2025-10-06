@@ -4,7 +4,7 @@
 module.exports = {
   command: ["hello", "hola"],
   description: "Saluda a alguien en el grupo",
-  category: "fun",
+  category: "anime",
   isGroup: true,
   isAdmin: false,
   botAdmin: false,
