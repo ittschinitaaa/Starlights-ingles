@@ -200,7 +200,10 @@ async function startBot() {
 
   client.ev.on("creds.update", saveCreds);
 }
-
+// inicio sistema sub-bot
+const { loadSubBots } = require("./lib/subbotManager");
+loadSubBots(); // Carga todos los sub-bots existentes
+// fin de sistema sub-bot
 startBot();
 let file = require.resolve(__filename);
 fs.watchFile(file, () => {
