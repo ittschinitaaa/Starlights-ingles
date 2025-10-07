@@ -30,13 +30,13 @@ module.exports = {
       // Mensaje opcional
       const userMessage = args.join(' ') || '';
       const infoMsg = userMessage ? `*» INFO :* ${userMessage}` : '';
-      let text = `*!  MENCION GENERAL  !*\n  *PARA ${participants.length} MIEMBROS* 🗣️\n\n${infoMsg}\n\n╭ ┄ 𝅄 ۪꒰ \`⡞᪲=͟͟͞${client.user.name} ≼᳞ׄ\` ꒱ ۟ 𝅄 ┄\n`;
+      let text = `*!  MENCION GENERAL  !*\n  *PARA ${participants.length} MIEMBROS* 🗣️\n\n${infoMsg}\n\n╭ ┄ 𝅄 ۪꒰ \`⡞᪲=͟͟͞${namebot} ≼᳞ׄ\` ꒱ ۟ 𝅄 ┄\n`;
 
       for (const member of participants) {
         text += `┊${customEmoji} @${member.id.split('@')[0]}\n`;
       }
 
-      text += `╰⸼ ┄ ┄ ┄ ─ ꒰  ׅ୭ *Starlights* ୧ ׅ ꒱ ┄ ─ ┄ ⸼`;
+      text += `╰⸼ ┄ ┄ ┄ ─ ꒰  ׅ୭ *${version}* ୧ ׅ ꒱ ┄ ─ ┄ ⸼`;
 
       // Enviar mensaje mencionando a todos
       await client.sendMessage(m.chat, { text, mentions: participants.map(p => p.id) });
