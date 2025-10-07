@@ -5,7 +5,7 @@ const crypto = require("crypto");
 module.exports = {
   command: ["code"],
   description: "Genera un código de vinculación para crear un sub-bot",
-  category: "main",
+  category: "jadibot",
   isPrivate: false,
   isGroup: false,
   run: async (client, m) => {
