@@ -1,5 +1,5 @@
 // commands/subbot.js
-const { startSubBot } = require("../lib/subbot");
+const { startSubBot } = require("../lib/subbot.js");
 
 module.exports = {
   command: ["code", "qr"],
