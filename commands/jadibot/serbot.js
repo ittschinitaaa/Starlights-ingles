@@ -1,36 +1,28 @@
 // código creado por china
 // github.com/ittschinitaaa
-
-const fs = require("fs");
-const path = require("path");
 const crypto = require("crypto");
 
 module.exports = {
-  command: ["code", "pairingcode", "subbot"],
-  description: "Genera un código para vincular un sub-bot a Starlights",
-  category: "jadibot",
+  command: ["code"],
+  description: "Genera un código de vinculación para crear un sub-bot",
+  category: "main",
   isPrivate: false,
+  isGroup: false,
   run: async (client, m) => {
-    try {
-      const code = crypto.randomInt(10000000, 99999999).toString();
-      const file = path.join(__dirname, "../../pairing_codes.json");
+    // Generar un código aleatorio de 8 dígitos
+    const code = Math.floor(10000000 + Math.random() * 90000000).toString();
 
-      let data = {};
-      if (fs.existsSync(file)) data = JSON.parse(fs.readFileSync(file));
+    // Guardar el código temporal en memoria global
+    if (!global.subbotCodes) global.subbotCodes = {};
+    global.subbotCodes[code] = {
+      owner: m.sender,
+      expires: Date.now() + 2 * 60 * 1000 // dura 2 minutos
+    };
 
-      data[code] = {
-        owner: m.sender,
-        createdAt: Date.now(),
-        expiresAt: Date.now() + 5 * 60 * 1000,
-      };
-      fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    const mensaje = `🌟 *Código de Vinculación:*\n\n> ${code}\n\n` +
+    `📱 Usa este código en otro WhatsApp para conectarlo como *SubBot* de Starlights.\n` +
+    `⏳ Expira en 2 minutos.`;
 
-      await m.reply(
-        `✨ *Código generado exitosamente*\n\n🔑 *Código:* ${code}\n🕒 Válido por *5 minutos*\n\nPara conectar un sub-bot, escribe:\n#connect ${code}`,
-      );
-    } catch (err) {
-      console.log(err);
-      m.reply("Ocurrió un error al generar el código");
-    }
+    await client.sendMessage(m.chat, { text: mensaje }, { quoted: m });
   },
 };
