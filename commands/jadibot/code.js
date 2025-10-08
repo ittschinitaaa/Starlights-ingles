@@ -1,69 +1,27 @@
-// código creado por china
-// github.com/ittschinitaaa
-// comando: #code — genera un código real de emparejamiento
+// code.js — creado por Chinita (Starlights)
+import { useMultiFileAuthState, makeWASocket, fetchLatestBaileysVersion } from "@whiskeysockets/baileys"
 
-const fs = require("fs");
-const path = require("path");
-const pino = require("pino");
-const {
-  default: makeWASocket,
-  useMultiFileAuthState,
-  fetchLatestBaileysVersion,
-} = require("@whiskeysockets/baileys");
-
-module.exports = {
-  command: ["code", "pairingcode", "subbot"],
-  description: "Genera un código de emparejamiento para vincular un sub-bot",
-  category: "subbots",
-  isGroup: false,
-  isAdmin: false,
-  botAdmin: false,
-
-  run: async (client, m, args) => {
+export default {
+  command: ["code", "pairing", "subbot"],
+  description: "Genera un código de emparejamiento para crear un sub-bot",
+  category: "jadibot",
+  run: async (client, m) => {
     try {
-      const senderNumber = m.sender.split("@")[0];
-      const sessionPath = path.join(process.cwd(), "sessions-sub", senderNumber);
-
-      if (!fs.existsSync(sessionPath))
-        fs.mkdirSync(sessionPath, { recursive: true });
-
-      const { state, saveCreds } = await useMultiFileAuthState(sessionPath);
-      const { version } = await fetchLatestBaileysVersion();
-
-      const sock = makeWASocket({
-        version,
-        logger: pino({ level: "silent" }),
-        printQRInTerminal: false,
-        browser: ["Starlights-SubBot", "Chrome", "1.0.0"],
-        auth: state,
-      });
-
-      sock.ev.on("creds.update", saveCreds);
-
-      if (!sock.authState.creds.registered) {
-        await m.reply("🌸 *Generando tu código de emparejamiento...*");
-
-        const code = await sock.requestPairingCode(senderNumber);
-        await client.sendMessage(m.chat, {
-          text: `✅ *Código de emparejamiento generado correctamente*\n\n> 🔐 Código: *${code}*\n\n📱 Usa este código en otro dispositivo para conectar tu *sub-bot Starlights*.\n⚠️ *Caduca en 1 minuto.*`,
-        });
-
-        sock.ev.on("connection.update", async (update) => {
-          const { connection } = update;
-          if (connection === "open") {
-            await client.sendMessage(m.chat, {
-              text: "💫 *Sub-bot conectado correctamente.*",
-            });
-          }
-        });
-      } else {
-        await m.reply(
-          "⚠️ Ya tienes una sesión activa. Elimina tu sesión antes de generar un nuevo código."
-        );
+      if (!client.user || !client.ws.socket || client.ws.socket.readyState !== 1) {
+        return m.reply("⚠️ El bot aún no está conectado a WhatsApp. Espera unos segundos y vuelve a intentarlo.")
       }
+
+      const userJid = m.sender
+      const code = await client.requestPairingCode(userJid)
+
+      await m.reply(`🔗 *Código de emparejamiento generado:*\n\n\`\`\`${code}\`\`\`\n\nUsa este código en tu WhatsApp para vincular un sub-bot.`)
     } catch (e) {
-      console.error(e);
-      await m.reply("❌ Error al generar el código de emparejamiento.");
+      console.error(e)
+      if (e.output?.payload?.message === "Connection Closed") {
+        m.reply("⚠️ No se pudo generar el código porque la conexión con WhatsApp se cerró. Reinicia el bot o espera unos segundos.")
+      } else {
+        m.reply("❌ Error al generar el código de emparejamiento.")
+      }
     }
   },
-};
+}
