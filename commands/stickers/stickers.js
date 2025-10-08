@@ -17,7 +17,7 @@ module.exports = {
     });
 
     let stickerTxT2 = "- 🌟ᩧ　ׅ　ׄ　⁞⁞ 𝐒𝕋𝐀ℝ𝐋𝕀𝐆ℍ𝐓S\n";
-    let stickerTxT = "⌯ ᤳ݄፞🔥꯭݃ 𝐏𝕆𝐖𝔼𝐑𝔼𝐃 𝔹𝐘 ℂ𝐇𝕀𝐍𝕀𝐓𝔸";
+    let stickerTxT = "${author}";
     
     if (/image/.test(mime)) {
       media = await quoted.download();
