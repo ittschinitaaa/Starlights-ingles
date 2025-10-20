@@ -5,14 +5,14 @@ const axios = require("axios");
 const youtubeRegexID = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/;
 
 module.exports = {
-  command: ["playaudio"],
+  command: ["playaudio","play"],
   description: "Descarga audio de YouTube",
   category: "downloader",
   run: async (client, m, args, { prefix }) => {
     try {
       if (!args.join(" ").trim()) 
         return client.sendMessage(m.chat, { text: "🔔 *Por favor, ingresa el nombre o link del audio a descargar.*" }, { quoted: m });
-
+      await m.react('⏱️');
       await client.sendMessage(m.chat, { text: "🎧 Buscando tu audio..." }, { quoted: m });
 
       const text = args.join(" ");
