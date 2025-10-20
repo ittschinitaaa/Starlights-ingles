@@ -1,5 +1,5 @@
 const moment = require("moment-timezone");
-const { version } = require("../../package.json");
+//const { version } = require("../../package.json");
 
 module.exports = {
   command: ["menu", "help", "ayuda"],
