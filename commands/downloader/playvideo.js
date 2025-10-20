@@ -5,7 +5,7 @@ const axios = require("axios");
 const youtubeRegexID = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/;
 
 module.exports = {
-  command: ["playvideo"],
+  command: ["playvideo","play2"],
   description: "Descarga video de YouTube",
   category: "downloader",
   run: async (client, m, args, { prefix }) => {
