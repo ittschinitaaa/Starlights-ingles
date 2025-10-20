@@ -5,15 +5,15 @@ const axios = require("axios");
 const youtubeRegexID = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/;
 
 module.exports = {
-  command: ["play"],
-  description: "Descarga audio o video de YouTube",
-  category: "downloader",
+  command: ["playaudio"],
+  description: "Descarga audio de YouTube",
+  category: "descargas",
   run: async (client, m, args, { prefix }) => {
     try {
       if (!args.join(" ").trim()) 
-        return client.sendMessage(m.chat, { text: "🔔 *Por favor, ingresa el nombre o link del archivo a descargar.*" }, { quoted: m });
+        return client.sendMessage(m.chat, { text: "🔔 *Por favor, ingresa el nombre o link del audio a descargar.*" }, { quoted: m });
 
-      await client.sendMessage(m.chat, { text: "🎧 Buscando tu canción..." }, { quoted: m });
+      await client.sendMessage(m.chat, { text: "🎧 Buscando tu audio..." }, { quoted: m });
 
       const text = args.join(" ");
       let videoIdMatch = text.match(youtubeRegexID);
@@ -40,7 +40,7 @@ module.exports = {
         contextInfo: {
           externalAdReply: {
             title,
-            body: 'Descargando archivo',
+            body: 'Descargando audio',
             mediaType: 1,
             previewType: 0,
             mediaUrl: url,
@@ -53,54 +53,30 @@ module.exports = {
 
       await client.sendMessage(m.chat, { text: infoMessage, mentions: [m.sender], ...external }, { quoted: m });
 
-      // Detecta si quiere video o audio
-      const isVideo = text.toLowerCase().includes("video");
+      // Descarga el audio
+      const res = await fetch(`https://api.vreden.my.id/api/v1/download/youtube/audio?url=${url}&quality=130`);
+      const json = await res.json();
 
-      if (isVideo) {
-        try {
-          const res = await fetch(`https://api.stellarwa.xyz/dow/ytmp4?url=${url}&apikey=Diamond`);
-          const json = await res.json();
+      if (!json.result?.download?.url) throw '*⚠️ No se obtuvo un enlace válido.*';
 
-          if (!json.status || !json.data?.dl) throw '⚠️ *No se obtuvo enlace de video.*';
-          const data = json.data;
-          const size = await getSize(data.dl);
-          const sizeStr = size ? await formatSize(size) : 'Desconocido';
-
-          let caption = `🎬 *Título:* ${data.title || title}\n*📦 Tamaño:* ${sizeStr}`;
-          await client.sendFile(m.chat, data.dl, `${data.title || 'video'}.mp4`, caption, m);
-          await m.react('✅');
-        } catch (e) {
-          return client.sendMessage(m.chat, { text: '⚠️ *No se pudo enviar el video. El archivo podría ser muy pesado o hubo un error en el enlace.*' }, { quoted: m });
+      await client.sendMessage(m.chat, {
+        audio: { url: json.result.download.url },
+        mimetype: 'audio/mpeg',
+        fileName: json.result.download.filename || `${json.result.metadata?.title || title}.mp3`,
+        contextInfo: {
+          externalAdReply: {
+            title,
+            body: 'Archivo descargado',
+            mediaType: 1,
+            thumbnail: thumb,
+            mediaUrl: url,
+            sourceUrl: url,
+            renderLargerThumbnail: true
+          }
         }
-      } else {
-        try {
-          const res = await fetch(`https://api.vreden.my.id/api/v1/download/youtube/audio?url=${url}&quality=130`);
-          const json = await res.json();
+      }, { quoted: m });
 
-          if (!json.result?.download?.url) throw '*⚠️ No se obtuvo un enlace válido.*';
-
-          await client.sendMessage(m.chat, {
-            audio: { url: json.result.download.url },
-            mimetype: 'audio/mpeg',
-            fileName: json.result.download.filename || `${json.result.metadata?.title || title}.mp3`,
-            contextInfo: {
-              externalAdReply: {
-                title,
-                body: 'Archivo descargado',
-                mediaType: 1,
-                thumbnail: thumb,
-                mediaUrl: url,
-                sourceUrl: url,
-                renderLargerThumbnail: true
-              }
-            }
-          }, { quoted: m });
-
-          await m.react('✅');
-        } catch (e) {
-          return client.sendMessage(m.chat, { text: '*❌ No se pudo enviar el audio. El archivo podría ser demasiado pesado o hubo un error en la generación del enlace.*' }, { quoted: m });
-        }
-      }
+      await m.react('✅');
 
     } catch (err) {
       return client.sendMessage(m.chat, { text: `❌ *Ocurrió un error* \n${err}` }, { quoted: m });
@@ -115,26 +91,4 @@ function formatViews(views) {
   if (views >= 1e6) return `${(views / 1e6).toFixed(1)}M (${views.toLocaleString()})`;
   if (views >= 1e3) return `${(views / 1e3).toFixed(1)}K (${views.toLocaleString()})`;
   return views.toString();
-}
-
-async function getSize(downloadUrl) {
-  try {
-    const response = await axios.head(downloadUrl, { maxRedirects: 5 });
-    const length = response.headers['content-length'];
-    return length ? parseInt(length, 10) : null;
-  } catch (error) {
-    console.error("Error al obtener el tamaño:", error.message);
-    return null;
-  }
-}
-
-async function formatSize(bytes) {
-  const units = ['B', 'KB', 'MB', 'GB'];
-  let i = 0;
-  if (!bytes || isNaN(bytes)) return 'Desconocido';
-  while (bytes >= 1024 && i < units.length - 1) {
-    bytes /= 1024;
-    i++;
-  }
-  return `${bytes.toFixed(2)} ${units[i]}`;
-}
+        }
