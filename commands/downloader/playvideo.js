@@ -7,7 +7,7 @@ const youtubeRegexID = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-z
 module.exports = {
   command: ["playvideo"],
   description: "Descarga video de YouTube",
-  category: "descargas",
+  category: "downloader",
   run: async (client, m, args, { prefix }) => {
     try {
       if (!args.join(" ").trim()) 
