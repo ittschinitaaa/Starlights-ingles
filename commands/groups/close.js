@@ -10,7 +10,8 @@ module.exports = {
   run: async (client, m) => {
     try {
       await client.groupSettingUpdate(m.chat, "announcement");
-      m.reply("🔒 El grupo ahora está *cerrado* .");
+      await m.react('✅');
+      //m.reply("🔒 El grupo ahora está *cerrado* .");
     } catch (e) {
       console.error(e);
       m.reply("❌ No se pudo cerrar el grupo");
