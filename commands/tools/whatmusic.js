@@ -1,8 +1,8 @@
 // Cosigo creado por China
 // github.com/ittschinitaaa
 
-import acrcloud from "acrcloud";
-import fetch from "node-fetch";
+const acrcloud from "acrcloud";
+const fetch from "node-fetch";
 
 const acr = new acrcloud({
   host: "identify-ap-southeast-1.acrcloud.com",
