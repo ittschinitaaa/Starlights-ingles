@@ -1,13 +1,13 @@
 // codigo creado por China
 // github.com/ittschinitaaa
 
-import fetch from "node-fetch";
-import FormData from "form-data";
+const fetch = require("node-fetch");
+const FormData = require("form-data");
 
-export default {
+module.exports = {
   command: ["hd", "remini", "enhance"],
   description: "Mejora la calidad de una imagen usando IA.",
-  category: "tools",
+  category: "herramientas",
   run: async (client, m, args, { prefix }) => {
     const q = m.quoted || m;
     const mime = (q.msg || q).mimetype || q.mediaType || "";
@@ -64,42 +64,4 @@ export default {
 async function subirAuguu(buffer) {
   const body = new FormData();
   body.append("files[]", buffer, "image.jpg");
-  const res = await fetch("https://uguu.se/upload.php", {
-    method: "POST",
-    body,
-    headers: body.getHeaders()
-  });
-
-  const text = await res.text();
-  try {
-    const json = JSON.parse(text);
-    const url = json.files?.[0]?.url;
-    if (!url || !url.startsWith("https://"))
-      throw new Error(`Respuesta inválida de Uguu.\n> ${text}`);
-    return url.trim();
-  } catch (e) {
-    throw new Error(`Falló al parsear respuesta de Uguu.\n> ${text}`);
-  }
-}
-
-async function mejorarSiputzx(url) {
-  const res = await fetch(
-    `${global.APIs.siputzx.url}/api/iloveimg/upscale?image=${encodeURIComponent(url)}&scale=4`
-  );
-  if (!res.ok) throw new Error(`Siputzx falló con código ${res.status}`);
-  return Buffer.from(await res.arrayBuffer());
-}
-mejorarSiputzx.engineName = "Siputzx";
-
-async function mejorarVreden(url) {
-  const res = await fetch(
-    `${global.APIs.vreden.url}/api/artificial/hdr?url=${encodeURIComponent(url)}&pixel=4`
-  );
-  if (!res.ok) throw new Error(`Vreden falló con código ${res.status}`);
-  const json = await res.json();
-  const finalUrl = json?.resultado?.datos?.descargaUrls?.[0];
-  if (!finalUrl || !finalUrl.startsWith("https://"))
-    throw new Error("Respuesta inválida de Vreden");
-  return finalUrl;
-}
-mejorarVreden.engineName = "Vreden";
+  const res
