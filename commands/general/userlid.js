@@ -1,7 +1,7 @@
 module.exports = {
   command: ["lid", "mylid"],
   description: "Obtén tu LID o el de otra persona",
-  category: "info",
+  category: "general",
   use: "(ejemplo: #lid o #lid 5490000000)",
   run: async (client, m, args) => {
     try {
