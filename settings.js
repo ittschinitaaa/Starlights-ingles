@@ -5,7 +5,7 @@ global.owner = ["573243768166"]; //Cambia este número por el tuyo
 global.sessionName = "star_session";
 global.version = "v1.0.0 | Mini";
 global.namebot = "⚞⭐̶𑂳ׅᭃֺ๋ᰍׅ(𝐒)ִ𝕋𝐀ֹℝ𝐋𝕀𝐆𝐇ℍ𝐓𝕊ִ༷̫֠⚟";
-global.author = "𝐂𝐡𝐢𝐧𝐚 | 𝐒𝐭𝐚𝐫𝐥𝐢𝐠𝐡𝐭𝐬";
+global.author = "𝕮𝖍𝖎𝖓𝖆𝕸𝖎𝖙𝖟𝖚𝖐𝖎 🔥";
 
 //Modifica los mensajes a tu preferencia
 global.mess = {
