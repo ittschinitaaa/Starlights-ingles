@@ -17,7 +17,7 @@ module.exports = {
     });
 
     let stickerTxT2 = "- 🌟ᩧ　ׅ　ׄ　⁞⁞ 𝐒𝕋𝐀ℝ𝐋𝕀𝐆ℍ𝐓S\n";
-    let stickerTxT = "𝕮𝖍𝖎𝖓𝖆𝕸𝖎𝖙𝖟𝖚𝖐𝖎";
+    let stickerTxT = `${dev}`;
     
     if (/image/.test(mime)) {
       media = await quoted.download();
