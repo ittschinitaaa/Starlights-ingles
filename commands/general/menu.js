@@ -68,7 +68,7 @@ module.exports = {
       menu += `╰────────────╯\n\n`;
     }
 
-    menu += `💫 Usa #comando para ejecutarlos`;
+    menu += `${dev}`;
 
     await client.sendMessage(
       m.chat,
