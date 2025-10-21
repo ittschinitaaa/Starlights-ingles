@@ -13,6 +13,7 @@ module.exports = {
       if (!args.join(" ").trim()) 
         return client.sendMessage(m.chat, { text: "🔔 *Por favor, ingresa el nombre o link del video a descargar.*" }, { quoted: m });
 
+      await m.react('⏱️');
       await client.sendMessage(m.chat, { text: "🎬 Buscando tu video..." }, { quoted: m });
 
       const text = args.join(" ");
