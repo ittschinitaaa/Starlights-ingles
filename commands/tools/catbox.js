@@ -1,10 +1,10 @@
 // código adaptado por china
 // github.com/ittschinitaaa
 
-import fetch from "node-fetch";
-import crypto from "crypto";
-import { FormData, Blob } from "formdata-node";
-import { fileTypeFromBuffer } from "file-type";
+const fetch = require("node-fetch");
+const crypto = require("crypto");
+const { FormData, Blob } = require("formdata-node");
+const { fileTypeFromBuffer } = require("file-type");
 
 module.exports = {
   command: ["catbox", "tourl2"],
@@ -71,3 +71,6 @@ async function catbox(content) {
         "Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Mobile Safari/537.36",
     },
   });
+
+  return await res.text();
+        }
