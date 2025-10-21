@@ -2,66 +2,34 @@
 // github.com/ittschinitaaa
 
 const fetch = require("node-fetch");
-const FormData = require("form-data");
 
 module.exports = {
-  command: ["hd", "remini", "enhance"],
-  description: "Mejora la calidad de una imagen usando IA.",
+  command: ["hd"],
+  description: "Mejora la calidad de una imagen mediante IA",
   category: "tools",
-  run: async (client, m, args, { prefix }) => {
-    const q = m.quoted || m;
-    const mime = (q.msg || q).mimetype || q.mediaType || "";
-
-    if (!mime) return m.reply("❀ Por favor, responde a una imagen con el comando.");
-    if (!/image\/(jpe?g|png)/.test(mime))
-      return m.reply(`ꕥ Formato no compatible (${mime}). Usa una imagen jpg o png.`);
-
-    const buffer = await q.download();
-    if (!buffer || buffer.length < 1000) return m.reply("⚠︎ Imagen no válida.");
-
-    await m.react("🕒");
+  run: async (client, m, args) => {
+    if (!args[0]) {
+      return client.sendMessage(m.chat, { text: "✦ Ingresa la URL de la imagen que deseas mejorar." }, { quoted: m });
+    }
 
     try {
-      const url = await subirAuguu(buffer);
-      const motores = [mejorarSiputzx, mejorarVreden];
-      const tareas = motores.map(fn =>
-        fn(url)
-          .then(res => ({ engine: fn.engineName, result: res }))
-          .catch(err => Promise.reject({ engine: fn.engineName, error: err }))
-      );
+      const url = args[0];
+      const api = `https://deliriussapi-oficial.vercel.app/api/tools/hd?url=${encodeURIComponent(url)}`;
 
-      const { engine, result } = await Promise.any(tareas);
+      const res = await fetch(api);
+      const json = await res.json();
 
-      await client.sendFile(
-        m.chat,
-        Buffer.isBuffer(result) ? result : result,
-        "imagen_hd.jpg",
-        `❀ Imagen mejorada exitosamente\n🪷 Servidor usado: \`${engine}\``,
-        m
-      );
+      if (!json || !json.result) {
+        return client.sendMessage(m.chat, { text: "⚠️ No se pudo mejorar la imagen. Intenta con otra URL." }, { quoted: m });
+      }
 
-      await m.react("✅");
-    } catch (err) {
-      await m.react("❌");
-      const errores = Array.isArray(err.errors)
-        ? err.errors
-            .map(
-              e =>
-                `• ${e?.engine || "Desconocido"}: ${
-                  e?.error?.message || e?.message || String(e)
-                }`
-            )
-            .join("\n")
-        : `• ${err?.engine || "Desconocido"}: ${
-            err?.error?.message || err?.message || String(err)
-          }`;
-
-      m.reply(`⚠︎ No se pudo mejorar la imagen\n> Usa *${prefix}report* para informarlo.\n\n${errores}`);
+      await client.sendMessage(m.chat, {
+        image: { url: json.result },
+        caption: "✨ Imagen mejorada con éxito mediante IA."
+      }, { quoted: m });
+    } catch (error) {
+      console.error(error);
+      client.sendMessage(m.chat, { text: "❌ Ocurrió un error al procesar la imagen." }, { quoted: m });
     }
-  }
+  },
 };
-
-async function subirAuguu(buffer) {
-  const body = new FormData();
-  body.append("files[]", buffer, "image.jpg");
-  const res
