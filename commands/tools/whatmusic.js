@@ -13,7 +13,7 @@ const acr = new acrcloud({
 export default {
   command: ["whatmusic", "shazam"],
   description: "Detecta el nombre de una canción a partir de un audio o video.",
-  category: "herramientas",
+  category: "tools",
   group: true,
   run: async (client, m, args, { prefix }) => {
     const q = m.quoted ? m.quoted : m;
