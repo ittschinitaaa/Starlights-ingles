@@ -80,7 +80,7 @@ module.exports = {
           forwardedNewsletterMessageInfo: {
             newsletterJid: "120363345778623279@newsletter", // tu canal
             serverMessageId: "1",
-            newsletterName: "⭐ 𝗦𝘁𝗮𝗿𝗹𝗶𝗴𝗵𝘁𝘀 𝗢𝗳𝗳𝗶𝗰𝗶𝗮𝗹 𝗖𝗵𝗮𝗻𝗻𝗲𝗹 ⭐",
+            newsletterName: "=͟͟͞͞𝐒𝐩𝐚𝐜𝐞 𝐖𝐨𝐫𝐥𝐝 - 𝐎𝐟𝐟𝐢𝐜𝐢𝐚𝐥 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ✰",
           },
           externalAdReply: {
             title: "⭑ 𝗦𝘁𝗮𝗿𝗹𝗶𝗴𝗵𝘁𝘀 - 𝗕𝗼𝘁 🌟",
