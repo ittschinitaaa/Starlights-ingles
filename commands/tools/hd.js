@@ -7,7 +7,7 @@ import FormData from "form-data";
 export default {
   command: ["hd", "remini", "enhance"],
   description: "Mejora la calidad de una imagen usando IA.",
-  category: "herramientas",
+  category: "tools",
   run: async (client, m, args, { prefix }) => {
     const q = m.quoted || m;
     const mime = (q.msg || q).mimetype || q.mediaType || "";
