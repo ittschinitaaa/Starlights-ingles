@@ -2,6 +2,7 @@ const fs = require("fs");
 const chalk = require("chalk");
 
 global.owner = ["573243768166"]; //Cambia este número por el tuyo
+global.owner2 = ["https://wa.me/573243768166"] //cambialo por tu enlace
 global.sessionName = "star_session";
 global.version = "v1.0.0 | Mini";
 global.namebot = "⚞⭐̶𑂳ׅᭃֺ๋ᰍׅ(𝐒)ִ𝕋𝐀ֹℝ𝐋𝕀𝐆𝐇ℍ𝐓𝕊ִ༷̫֠⚟";
