@@ -54,7 +54,7 @@ module.exports = {
       await client.sendMessage(m.chat, { text: infoMessage, mentions: [m.sender], ...external }, { quoted: m });
 
       // Descarga el audio
-      const res = await fetch(`https://deliriussapi.xyz/api/downloader/ytmp3?url=${encodeURIComponent(url)}`);
+      const res = await fetch(`https://mayapi.ooguy.com/ytdl?type=.mp3&quality=130kbps&apikey=may-0083a05a`);
       //  const res = await fetch(`https://api.vreden.my.id/api/v1/download/youtube/audio?url=${url}&quality=130`);
       const json = await res.json();
 
