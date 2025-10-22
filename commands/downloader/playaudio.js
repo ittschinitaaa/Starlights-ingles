@@ -66,7 +66,7 @@ module.exports = {
         contextInfo: {
           externalAdReply: {
             title,
-            body: `${dev}`,
+            body: 'audio descargado',
             mediaType: 1,
             thumbnail: thumb,
             mediaUrl: url,
