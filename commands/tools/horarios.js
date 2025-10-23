@@ -2,7 +2,7 @@
 // github.com/ittschinitaaa
 module.exports = {
   command: ["horario"],
-  description: "Muestra la hora actual en varias zonas horarias",
+  description: "Displays the current time in multiple time zones",
   category: "tools",
   run: async (client, m, args) => {
     const moment = require('moment-timezone');
@@ -30,13 +30,13 @@ module.exports = {
       GNQ: 'Africa/Malabo'
     };
 
-    let msg = '「 ZONA-HORARIA ⏰ 」\n\n';
+    let msg = '「 TIME ZONE ⏰ 」\n\n';
     for (let [key, value] of Object.entries(zones)) {
       msg += `⏱️${key.padEnd(11)}: ${moment().tz(value).format('DD/MM HH:mm')}\n`;
     }
 
     const serverZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    msg += `${String.fromCharCode(8206).repeat(850)}\nZona horaria del servidor actual:\n[ ${serverZone} ] ${moment().tz(serverZone).format('DD/MM/YY HH:mm:ss')}`;
+    msg += `${String.fromCharCode(8206).repeat(850)}\nCurrent server time zone:\n[ ${serverZone} ] ${moment().tz(serverZone).format('DD/MM/YY HH:mm:ss')}`;
 
     await client.sendMessage(m.chat, { text: msg }, { quoted: m });
   }
