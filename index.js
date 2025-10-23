@@ -72,14 +72,14 @@ print(
 print("Shell", process.env.SHELL || process.env.COMSPEC || "desconocido");
 print("CPU", os.cpus()[0]?.model.trim() || "unknown");
 print(
-  "Memoria",
+  "Memory",
   `${(os.freemem() / 1024 / 1024).toFixed(0)} MiB / ${(os.totalmem() / 1024 / 1024).toFixed(0)} MiB`,
 );
 print("Script version", `v${require("./package.json").version}`);
 print("Node.js", process.version);
 print("Baileys", `WhiskeySockets/baileys`);
 print(
-  "Fecha & Tiempo",
+  "Date & Time",
   new Date().toLocaleString("en-US", {
     timeZone: "America/Argentina/Buenos_Aires",
     hour12: false,
@@ -103,24 +103,24 @@ async function startBot() {
 
   if (!client.authState.creds.registered) {
     const phoneNumber = await question(
-      log.warn("Ingrese su número de WhatsApp\n") +
-        log.info("Ejemplo: 573243768166\n"),
+      log.warn("Enter your WhatsApp number\n") +
+        log.info("Example: 573243768166\n"),
     );
     try {
-      log.info("Solicitando código de emparejamiento...");
+      log.info("Requesting pairing code...");
       const pairing = await client.requestPairingCode(phoneNumber, "S1T2A3R4"); 
       log.success(
-        `Código de emparejamiento: ${chalk.cyanBright(pairing)} (expira en 15s)`,
+        `Pairing code: ${chalk.cyanBright(pairing)} (expires in 15s)`,
       );
     } catch (err) {
-      log.error("Error al solicitar el código de emparejamiento:", err);
+      log.error("Error requesting pairing code:", err);
       exec("rm -rf ./lurus_session/*");
       process.exit(1);
     }
   }
 
   await global.loadDatabase();
-  console.log(chalk.yellow("Base de datos cargada correctamente."));
+  console.log(chalk.yellow("Database loaded successfully."));
 
   client.sendText = (jid, text, quoted = "", options) =>
     client.sendMessage(jid, { text, ...options }, { quoted });
@@ -131,43 +131,43 @@ async function startBot() {
       const reason = new Boom(lastDisconnect?.error)?.output.statusCode;
       if (reason === DisconnectReason.connectionLost) {
         log.warning(
-          "Se perdió la conexión al servidor, intento reconectarme..",
+          "Connection to the server was lost, I'm trying to reconnect...",
         );
         startBot();
       } else if (reason === DisconnectReason.connectionClosed) {
-        log.warning("Conexión cerrada, intentando reconectarse...");
+        log.warning("Connection closed, attempting to reconnect...");
         startBot();
       } else if (reason === DisconnectReason.restartRequired) {
-        log.warning("Es necesario reiniciar..");
+        log.warning("Reboot required...");
         startBot();
       } else if (reason === DisconnectReason.timedOut) {
-        log.warning("Tiempo de conexión agotado, intentando reconectarse...");
+        log.warning("Connection timed out, trying to reconnect...");
         startBot();
       } else if (reason === DisconnectReason.badSession) {
-        log.warning("Eliminar sesión y escanear nuevamente...");
+        log.warning("Delete session and scan again...");
         startBot();
       } else if (reason === DisconnectReason.connectionReplaced) {
-        log.warning("Primero cierre la sesión actual...");
+        log.warning("First, log out of your current session...");
       } else if (reason === DisconnectReason.loggedOut) {
-        log.warning("Escanee nuevamente y ejecute...");
+        log.warning("Scan again and run...");
         exec("rm -rf ./lurus_session/*");
         process.exit(1);
       } else if (reason === DisconnectReason.forbidden) {
-        log.error("Error de conexión, escanee nuevamente y ejecute...");
+        log.error("Connection error, please scan again and run...");
         exec("rm -rf ./lurus_session/*");
         process.exit(1);
       } else if (reason === DisconnectReason.multideviceMismatch) {
-        log.warning("Inicia nuevamente");
+        log.warning("Start again");
         exec("rm -rf ./lurus_session/*");
         process.exit(0);
       } else {
         client.end(
-          `Motivo de desconexión desconocido : ${reason}|${connection}`,
+          `Unknown disconnection reason : ${reason}|${connection}`,
         );
       }
     }
     if (connection === "open") {
-      log.success("Su conexión fue exitosa con Starlights 🌟");
+      log.success("Your connection was successful with Starlights 🌟");
     }
   });
 
@@ -205,7 +205,7 @@ startBot();
 let file = require.resolve(__filename);
 fs.watchFile(file, () => {
   fs.unwatchFile(file);
-  console.log(chalk.yellowBright(`Se actualizo el archivo ${__filename}`));
+  console.log(chalk.yellowBright(`The file was updated ${__filename}`));
   delete require.cache[file];
   require(file);
 });
