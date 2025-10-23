@@ -2,7 +2,7 @@
 // github.com/ittschinitaaa
 module.exports = {
   command: ["close", "cerrar"],
-  description: "Cierra el grupo (solo admins pueden hablar)",
+  description: "Close the group (only admins can speak)",
   category: "groups",
   isGroup: true,
   isAdmin: true,
@@ -14,7 +14,7 @@ module.exports = {
       //m.reply("🔒 El grupo ahora está *cerrado* .");
     } catch (e) {
       console.error(e);
-      m.reply("❌ No se pudo cerrar el grupo");
+      m.reply("❌ The group could not be closed");
     }
   },
 };
