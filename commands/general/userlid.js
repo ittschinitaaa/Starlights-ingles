@@ -1,6 +1,6 @@
 module.exports = {
   command: ["lid", "mylid"],
-  description: "Obtén tu LID o el de otra persona",
+  description: "Get your LID or someone else's",
   category: "general",
   use: "(ejemplo: #lid o #lid 5490000000)",
   run: async (client, m, args) => {
@@ -16,10 +16,10 @@ module.exports = {
       }
 
       let user = await client.onWhatsApp(jid)
-      let lid = user?.[0]?.lid || "No encontrado"
+      let lid = user?.[0]?.lid || "Not found"
 
       let info = `
-📌 *Información de WhatsApp*
+\`📌 *WhatsApp information*\`
 - JID: ${jid}
 - LID: ${lid}
       `.trim()
@@ -27,7 +27,7 @@ module.exports = {
       m.reply(info)
     } catch (e) {
       console.error(e)
-      m.reply("❌ Ocurrió un error al obtener el LID-JID.")
+      m.reply("❌ An error occurred while getting the LID-JID.")
     }
   },
 }
