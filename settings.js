@@ -11,8 +11,8 @@ global.dev = "© 𝖯𝗈𝗐𝖾𝗋𝖾𝖽 𝖻𝗒 𝖢𝖧𝖨𝖭𝖨𝖳�
 
 //Modifica los mensajes a tu preferencia
 global.mess = {
-  admin: "> ☆ Esta función está reservada para los administradores del grupo",
-  botAdmin: "> ☆ Para ejecutar esta función debo ser administrador",
+  admin: "> ☆ This function is reserved for group administrators.",
+  botAdmin: "> ☆ To perform this function, I must be an administrator",
   owner: "> ☆ Solo mi creador puede usar este comando",
   group: "> ☆ Esta función solo funciona en grupos",
   private: "> ☆ Esta función solo funciona en mensajes privados",
