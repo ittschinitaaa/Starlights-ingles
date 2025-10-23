@@ -2,13 +2,13 @@ const moment = require("moment");
 
 module.exports = {
   command: ["ping"],
-  description: "Chequea la conexión y muestra info del bot",
+  description: "Checks the connection and displays bot info",
   category: "general",
   run: async (client, m, args, { prefix }) => {
     const start = Date.now();
     const tempMsg = await client.sendMessage(
       m.key.remoteJid,
-      { text: "⏰ Cargando ping..." },
+      { text: "⏰ Loading ping..." },
       { quoted: m },
     );
     const latency = Date.now() - start;
@@ -19,10 +19,10 @@ module.exports = {
       s = Math.floor(up % 60);
     const ram = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2);
 
-    const userTag = m.pushName || "Invitado";
+    const userTag = m.pushName || "Guest";
     const sender = m.sender.replace(/@.+/, "");
 
-    const msg = `Hola, ${userTag}
+    const msg = `Hello, ${userTag}
 
 🌟 \`Ping Status\`
 
