@@ -3,16 +3,16 @@
 
 module.exports = {
   command: ['del', 'delete'],
-  description: 'Elimina un mensaje citado en el chat',
+  description: 'Delete a quoted message in the chat',
   category: 'groups',
   isGroup: false,
   isAdmin: true,
   botAdmin: true,
-  use: 'responder al mensaje a eliminar',
+  use: 'reply to the message to delete',
   run: async (client, m) => {
     try {
       if (!m.quoted) {
-        return client.sendMessage(m.chat, { text: '❌ Por favor, cita el mensaje que deseas eliminar.' }, { quoted: m });
+        return client.sendMessage(m.chat, { text: '❌ Please quote the message you want to delete..' }, { quoted: m });
       }
 
       // Obtener datos del mensaje citado
@@ -35,7 +35,7 @@ module.exports = {
       }
     } catch (err) {
       console.error(err);
-      await client.sendMessage(m.chat, { text: '❌ No se pudo eliminar el mensaje. Asegúrate de que soy admin.' }, { quoted: m });
+      await client.sendMessage(m.chat, { text: '❌ The message could not be deleted. Make sure I m an admin...' }, { quoted: m });
     }
   }
 };
