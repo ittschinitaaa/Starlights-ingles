@@ -27,9 +27,9 @@ module.exports = {
     const info = `𝐒𝐭𝐚𝐫𝐥𝐢𝐠𝐡𝐭𝐬 - 𝐂𝐡𝐢𝐧𝐚 🇨🇳
 
 *Versión:* ${pkg.version}
-*Autor:* 𝐂𝐡𝐢𝐧𝐚 | 𝐒𝐭𝐚𝐫𝐥𝐢𝐠𝐡𝐭𝐬
+*Author:* 𝐂𝐡𝐢𝐧𝐚 | 𝐒𝐭𝐚𝐫𝐥𝐢𝐠𝐡𝐭𝐬
 *Uptime:* ${h}h ${min}m ${s}s
-*Plataforma:* ${platform}
+*Platform:* ${platform}
 *Node.js:* ${nodeV}
 *Host:* ${host}
 *Shell:* ${shell}
@@ -37,7 +37,7 @@ module.exports = {
 *CPU:* ${cpu} (${cores} núcleos)
 *Memoria:* ${mem[0]} MiB libre / ${mem[1]} MiB total
 
-*Fecha & Hora:* ${now}`;
+*Date & Time:* ${now}`;
 
     await client.sendMessage(
       m.chat,
