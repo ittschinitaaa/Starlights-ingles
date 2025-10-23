@@ -47,7 +47,7 @@ module.exports = async (client, m) => {
     .trim()
     .split(/\s+/)[0]
     .toLowerCase();
-  const pushname = m.pushName || "Sin nombre";
+  const pushname = m.pushName || "Unnamed";
   const sender = m.isGroup
     ? m.key.participant || m.participant
     : m.key.remoteJid;
@@ -117,10 +117,10 @@ module.exports = async (client, m) => {
     try {
       await cmdData.run(client, m, args, { text });
     } catch (error) {
-      console.error(chalk.red(`Error ejecutando comando ${command}:`), error);
+      console.error(chalk.red(`Error executing command ${command}:`), error);
       await client.sendMessage(
         m.chat,
-        { text: "Error al ejecutar el comando" },
+        { text: "Error executing command" },
         { quoted: m },
       );
     }
@@ -132,15 +132,12 @@ fs.watchFile(mainFile, () => {
   fs.unwatchFile(mainFile);
   console.log(
     chalk.yellowBright(
-      `\nSe actualizó ${path.basename(__filename)}, recargando...`,
+      `\nIt was updated ${path.basename(__filename)}, reloading...`,
     ),
   );
   delete require.cache[mainFile];
   require(mainFile);
 });
-
-
-// Mini Lurus © 2025 - Creado por Zam  | GataNina-Li | DevAlexJs | Elrebelde21
 
 
 
