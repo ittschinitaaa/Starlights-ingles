@@ -13,10 +13,10 @@ global.dev = "© 𝖯𝗈𝗐𝖾𝗋𝖾𝖽 𝖻𝗒 𝖢𝖧𝖨𝖭𝖨𝖳�
 global.mess = {
   admin: "> ☆ This function is reserved for group administrators.",
   botAdmin: "> ☆ To perform this function, I must be an administrator",
-  owner: "> ☆ Solo mi creador puede usar este comando",
-  group: "> ☆ Esta función solo funciona en grupos",
-  private: "> ☆ Esta función solo funciona en mensajes privados",
-  wait: "> ☆ Espera un momento...",
+  owner: "> ☆ Only my creator can use this command",
+  group: "> ☆ This feature only works in groups",
+  private: "> ☆ This feature only works in private messages.",
+  wait: "> ☆ Hang on a minute...",
 };
 
 global.thumbnailUrl = "https://files.catbox.moe/sklz18.png"; //Cambia esta imagen
