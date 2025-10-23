@@ -1,21 +1,18 @@
-// Comando creado por China
-// github: github.com/ittschinitaaa
-
 module.exports = {
   command: ["cal", "calc", "calcular", "calculadora"],
-  description: "Calcula operaciones matemáticas básicas",
+  description: "Calculate basic mathematical operations",
   category: "tools",
   isGroup: false,
   isAdmin: false,
   botAdmin: false,
-  use: "<ecuación o responder a un mensaje>",
+  use: "<equation or reply to a message>",
   exp: 5,
 
   run: async (client, m, args) => {
     try {
       const emoji = "🧮";
       let text = args.join(" ") || (m.quoted && m.quoted.text) || "";
-      if (!text) return client.reply(m.chat, `${emoji} Ingresa la ecuación.\nSímbolos compatibles: -, +, *, /, ×, ÷, π, e, (, )`, m);
+      if (!text) return client.reply(m.chat, `${emoji} Enter the equation.\nSupported symbols: -, +, *, /, ×, ÷, π, e, (, )`, m);
 
       let val = text
         .replace(/[^0-9\-\/+*×÷πEe()piPI/]/g, '')
@@ -34,19 +31,19 @@ module.exports = {
         .replace(/\*/g, '×');
 
       let result = (new Function('return ' + val))();
-      if (result === undefined || result === null) throw new Error("Resultado indefinido");
+      if (result === undefined || result === null) throw new Error("Indefinite result");
 
       await m.react("🧮");
       await client.sendMessage(
         m.chat,
-        { text: `✧ Resultado:\n\n*${format}* = _${result}_` },
+        { text: `✧ Result:\n\n*${format}* = _${result}_` },
         { quoted: m }
       );
     } catch (e) {
       console.error(e);
       await client.reply(
         m.chat,
-        "❌ Formato incorrecto. Solo puedes usar números y símbolos: -, +, *, /, ×, ÷, π, e, (, )",
+        "❌ Incorrect format. You can only use numbers and symbols: -, +, *, /, ×, ÷, π, e, (, )",
         m
       );
     }
