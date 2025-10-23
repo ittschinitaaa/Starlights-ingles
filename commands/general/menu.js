@@ -3,7 +3,7 @@ const moment = require("moment-timezone");
 
 module.exports = {
   command: ["menu", "help", "ayuda"],
-  description: "Muestra la lista de comandos del bot",
+  description: "Displays the list of bot commands",
   category: "general",
   run: async (client, m, args) => {
     const cmds = [...global.comandos.values()];
