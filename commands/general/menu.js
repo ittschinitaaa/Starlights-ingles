@@ -12,14 +12,14 @@ module.exports = {
     const jam = moment.tz("America/Argentina/Buenos_Aires").format("HH:mm:ss");
     const ucapan =
       jam < "05:00:00"
-        ? "🌙 Buen día"
+        ? "🌙 Good day"
         : jam < "11:00:00"
-        ? "☀️ Buen día"
+        ? "☀️ Good day"
         : jam < "15:00:00"
-        ? "🌤️ Buenas tardes"
+        ? "🌤️ Good afternoon"
         : jam < "19:00:00"
-        ? "🌆 Buenas tardes"
-        : "🌙 Buenas noches";
+        ? "🌆 Good afternoons"
+        : "🌙 Good night";
 
     // Contacto citado
     const fkontak = {
@@ -53,10 +53,9 @@ module.exports = {
     let menu = `
 ✼─────────────✼
 ${ucapan}, *${m.pushName || "Usuario"}*
-✿ 𝗕𝗶𝗲𝗻𝘃𝗲𝗻𝗶𝗱@ ${global.namebot}
+✿ 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 ${global.namebot}
 ✿ 𝗩𝗲𝗿𝘀𝗶𝗼𝗻: ${version}
-✿ 𝗗𝘂𝗲𝗻̃𝗮: ${owner2}
-✿ 𝗟𝗶𝗯𝗿𝗲𝗿𝗶𝗮: 𝖡𝖺𝗂𝗅𝖾𝗒𝗌 𝖬𝗎𝗅𝗍𝗂 𝖣𝖾𝗏𝗂𝖼𝖾
+✿ 𝗢𝘄𝗻𝗲𝗿: ${owner2}
 ✼─────────────✼\n`;
 
     for (const [cat, commands] of Object.entries(categories)) {
@@ -84,7 +83,7 @@ ${ucapan}, *${m.pushName || "Usuario"}*
           },
           externalAdReply: {
             title: "⭑ 𝗦𝘁𝗮𝗿𝗹𝗶𝗴𝗵𝘁𝘀 - 𝗕𝗼𝘁 🌟",
-            body: "Starlights, creado con amor por 𝕮𝖍𝖎𝖓𝖆 🔥",
+            body: "Starlights, created with love by 𝕮𝖍𝖎𝖓𝖆 🔥",
             thumbnailUrl: "https://files.catbox.moe/e1lirs.jpg", // tu imagen actual
             sourceUrl: "https://starlights.vercel.app", // tu página o canal
             mediaType: 1,
