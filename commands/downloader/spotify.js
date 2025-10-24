@@ -12,13 +12,16 @@ module.exports = {
     try {
       await client.sendMessage(m.chat, { react: { text: "🕒", key: m.key } })
 
-      const isUrl = /https?:\/\/(open\.)?spotify\.com\/track\/[a-zA-Z0-9]+/.test(text)
       let trackUrl = text
       let info = null
       let data = null
 
+      // Detecta si es link de Spotify
+      const isUrl = /https?:\/\/(open\.)?spotify\.com\/track\/[a-zA-Z0-9]+/.test(text)
+
       if (!isUrl) {
-        const search = await axios.get(`${global.APIs.delirius.url}/search/spotify?q=${encodeURIComponent(text)}&limit=1`)
+        // Si no es URL, usamos una API pública de búsqueda Spotify
+        const search = await axios.get(`https://api.delirius.tech/search/spotify?q=${encodeURIComponent(text)}&limit=1`)
         const result = Array.isArray(search.data?.data) ? search.data.data[0] : null
         if (!result || !result.url) throw new Error("ꕥ No se encontraron resultados.")
         trackUrl = result.url
@@ -34,7 +37,8 @@ module.exports = {
         }
       }
 
-      const res = await axios.get(`${global.APIs.delirius.url}/download/spotifydl?url=${encodeURIComponent(trackUrl)}`)
+      // Descarga de la canción
+      const res = await axios.get(`https://api.delirius.tech/download/spotifydl?url=${encodeURIComponent(trackUrl)}`)
       const d = res.data?.data
       if (!res.data?.status || !d?.url) throw new Error("ꕥ No se pudo obtener el audio.")
 
@@ -64,7 +68,7 @@ module.exports = {
               containsAutoReply: true,
               renderLargerThumbnail: true,
               title: '✧ s⍴᥆𝗍і𝖿ᥡ • mᥙsіᥴ ✧',
-              body: dev,
+              body: "Mía",
               mediaType: 1,
               thumbnailUrl: data.image,
               mediaUrl: data.url,
@@ -83,4 +87,4 @@ module.exports = {
       client.sendMessage(m.chat, { text: `⚠︎ Se ha producido un problema.\n> Usa *${prefix}report* para informarlo.\n\n${err.message}` }, { quoted: m })
     }
   }
-}
+          }
