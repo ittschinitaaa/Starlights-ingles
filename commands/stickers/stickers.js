@@ -2,7 +2,7 @@ const fs = require("fs");
 
 module.exports = {
   command: ["sticker", "s"],
-  description: "Crea una imagen a sticker",
+  description: "Create an image to sticker",
   category: "stickers",
   run: async (client, m) => {
     const quoted = m.quoted || m;
@@ -28,7 +28,7 @@ module.exports = {
       await fs.unlinkSync(encmedia);
     } else if (/video/.test(mime)) {
       if ((quoted.msg || quoted).seconds > 20) {
-        return m.reply("El video no puede ser muy largo.");
+        return m.reply("The video cannot be too long.");
       }
       media = await quoted.download();
 
@@ -39,7 +39,7 @@ module.exports = {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       await fs.unlinkSync(encmedia);
     } else {
-      m.reply("Envía una *imagen* o *video* junto con el comando !s");
+      m.reply("Send an *image* or *video* along with the !s command");
     }
   },
 };
