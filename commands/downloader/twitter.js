@@ -2,7 +2,7 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 
 module.exports = {
-  command: ["x", "twitter", "xdl"],
+  command: ["twitter", "x", "xdl"],
   description: "Descarga imágenes o videos de Twitter/X",
   category: "downloader",
   run: async (client, m, args, { prefix }) => {
