@@ -4,7 +4,7 @@ const cheerio = require('cheerio')
 module.exports = {
   command: ["pinterest", "pin"],
   description: "Busca imágenes o videos en Pinterest",
-  category: "download",
+  category: "downloader",
   run: async (client, m, args, { prefix }) => {
     const text = args.join(" ")
     if (!text) return client.sendMessage(m.chat, { text: `❀ Por favor, ingresa lo que deseas buscar por Pinterest.` }, { quoted: m })
