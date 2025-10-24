@@ -28,7 +28,7 @@ function reloadCommands(dir = path.join(__dirname, "..")) {
 
 module.exports = {
   command: ["update", "actualizar"],
-  description: "Actualiza desde GitHub",
+  description: "Update from GitHub",
   isOwner: true,
   category: "owner",
   run: async (client, m, args, from, isCreator) => {
@@ -39,9 +39,9 @@ module.exports = {
       reloadCommands(baseDir);
       let msg = "";
       if (stdout.includes("Already up to date.")) {
-        msg = "*Estado:* Todo está actualizado.";
+        msg = "*Status:* Everything is up to date.";
       } else {
-        msg = `*Actualización completada*\n\n${stdout}`;
+        msg = '\`Update completed\`\n\n${stdout}';
       }
       client.sendMessage(m.key.remoteJid, { text: msg }, { quoted: m });
     });
