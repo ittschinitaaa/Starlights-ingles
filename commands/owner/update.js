@@ -41,7 +41,7 @@ module.exports = {
       if (stdout.includes("Already up to date.")) {
         msg = "*Status:* Everything is up to date.";
       } else {
-        msg = '\`Update completed\`\n\n${stdout}';
+        msg = `\`Update completed\`\n\n${stdout}`;
       }
       client.sendMessage(m.key.remoteJid, { text: msg }, { quoted: m });
     });
