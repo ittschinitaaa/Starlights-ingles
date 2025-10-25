@@ -4,7 +4,7 @@ const { resolveLidToRealJid } = require("../../lib/utils");
 
 module.exports = {
   command: ["demote", "degradar", "quitaradmin"],
-  description: "Degrada a un administrador en el grupo",
+  description: "Demote an administrator in the group",
   category: "groups",
   use: "@0",
   isGroup: true,
@@ -37,17 +37,17 @@ module.exports = {
     } else if (m.quoted) {
       target = await resolveLidToRealJid(m.quoted.sender, client, m.chat);
     } else {
-      return m.reply("*Etiquete* al *administrador* que desea *degradar*");
+      return m.reply("*Tag* the *administrator* you want to *demote*");
     }
 
     try {
       await client.groupParticipantsUpdate(m.chat, [target], "demote");
-      m.reply(`*@${target.split("@")[0]}* ha sido degradado de administrador`, {
+      m.reply(`*@${target.split("@")[0]}* has been demoted from administrator`, {
         mentions: [target],
       });
     } catch (e) {
       m.reply(
-        "No se pudo degradar al administrador, verifica permisos o que el usuario sea admin",
+        "Failed to demote administrator, please check permissions or that the user is admin",
       );
     }
   },
