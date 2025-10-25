@@ -2,7 +2,7 @@
 // github.com/ittschinitaaa
 module.exports = {
   command: ["infogrupo", "groupinfo"],
-  description: "Muestra información del grupo",
+  description: "Displays group information",
   category: "groups",
   isGroup: true,
   isAdmin: false,
@@ -10,17 +10,17 @@ module.exports = {
   run: async (client, m) => {
     try {
       const group = await client.groupMetadata(m.chat);
-      let info = `👥 *Nombre:* ${group.subject}
-📝 *Descripción:* ${group.desc || "Sin descripción"}
+      let info = `👥 *Name:* ${group.subject}
+📝 *Description:* ${group.desc || "No description"}
 🔒 *ID:* ${m.chat}
-👑 *Dueño:* ${group.owner ? group.owner.split("@")[0] : "No definido"}
-📅 *Creado:* ${new Date(group.creation * 1000).toLocaleString()}
-👤 *Miembros:* ${group.participants.length}`;
+👑 *Owner:* ${group.owner ? group.owner.split("@")[0] : "Not defined"}
+📅 *Created:* ${new Date(group.creation * 1000).toLocaleString()}
+👤 *Members:* ${group.participants.length}`;
 
       m.reply(info);
     } catch (e) {
       console.error(e);
-      m.reply("❌ No pude obtener la información del grupo");
+      m.reply("❌ I couldn't get the group information");
     }
   },
 };
