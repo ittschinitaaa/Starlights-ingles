@@ -4,11 +4,11 @@ const { generateWAMessageFromContent } = require("@whiskeysockets/baileys");
 
 module.exports = {
   command: ["hidetag", "tag"],
-  description: "Menciona a todos sin mostrar los @",
+  description: "Mention everyone without showing the @",
   category: "groups",
   isGroup: true,
   isAdmin: true,
-  use: "(*ingresa* o responde a un *texto*",
+  use: "(*enter* or reply to a *text*)",
   run: async (client, m, args) => {
     const text = args.join(" ");
     const groupMetadata = m.isGroup
@@ -19,7 +19,7 @@ module.exports = {
     const mentions = groupParticipants.map((jid) => client.decodeJid(jid));
 
     if (!m.quoted && !text) {
-      return m.reply(`*Ingresa* un texto o *responde* a uno`);
+      return m.reply(`*Enter* a text or *reply* to one`);
     }
 
     const q = m.quoted ? m.quoted : m;
@@ -82,7 +82,7 @@ module.exports = {
       );
     } catch (e) {
       console.error(e);
-      return m.reply("Error al enviar el mensaje con tag\n\n" + e);
+      return m.reply("Error sending message with tag\n\n" + e);
     }
   },
 };
